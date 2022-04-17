@@ -34,18 +34,6 @@ const FeatureList = [
       </>
     ),
   },
-  {
-    title: 'Blockchain Ready',
-    png: require('@site/static/img/feature/anychain.png').default,
-    description: (
-      <>
-        The RISC Zero proofs can be verified on almost any blockchain, enabling
-        programs run anywhere to be trusted by every person in the world. Users
-        can run logic on their computer with private data and prove the results
-        without exposing the input data.
-      </>
-    ),
-  },
 ];
 
 function Feature({png, title, description}) {

@@ -101,7 +101,7 @@ const config = {
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/risczero',
+                href: 'https://discord.gg/risczero',
               },
               {
                 label: 'Twitter',

@@ -28,14 +28,14 @@ const config = {
           rehypePlugins: [katex],
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/risc0/website2/edit/main/docs/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/risc0/website2/edit/main/blog/',
         },
+        pages : {},
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -73,6 +73,9 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
+          {to: '/team', label: 'Team', position: 'left'},
+          {to: '/whitepaper', label: 'Whitepaper', position: 'left'},
+          {to: '/mailing', label: 'Mailing List', position: 'left'},
           {
             href: 'https://github.com/risc0/risc0',
             label: 'GitHub',

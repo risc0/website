@@ -1,11 +1,11 @@
 ---
 slug: announce
-title: A New Day for ZK
+title: Introducing RISC Zero
 authors: [brianretford]
 tags: [zk, oss]
 ---
 
-We are very excited to share a new kind of computing platform with the world – 
+We're excited to share a new kind of computing platform with the world – 
 *one that can't lie about anything it does.* RISC Zero enables *any developer*
 to build zero-knowledge proofs that can be *executed and verified on any modern
 computer* in the languages they are most familiar with.
@@ -20,18 +20,19 @@ C++.
 # General Purpose Verifiable Computing
 
 RISC Zero is a fully-compliant software implementation of the RISC-V 
-microarchitecture (RV32IM, to be precise) implemented in a zk-STARK based
-proving system.
+microarchitecture (RV32IM). The RISC-V ISA is implemented as
+a set of polynomial constraints inside a zk-STARK based proving
+system.
 
-### So it is, what, exactly?
+## So RISC Zero is what, exactly?
 
 RISC Zero is zero-knowledge virtual machine that can run on any platform.
-It's a virtual microcontroller or co-processor that produces receipts for 
-every program it runs. These receipts can be verified at anytime by anyone 
-in milliseconds – **even if you don't trust the party that executed the code**
-.
+It's a virtual microcontroller / co-processor that produces receipts for 
+every program it runs, kind of like a secure virtual Adruino. These receipts can be verified at anytime by anyone 
+in milliseconds – **even if you don't trust the party that executed the code.**
 
-### How is it different from other ZK projects?
+
+## How is it different from other ZK projects?
 
 Our initial release of RISC Zero is different in a few critical ways:
 

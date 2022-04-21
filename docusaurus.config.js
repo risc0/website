@@ -74,7 +74,6 @@ const config = {
             label: 'Tutorial',
           },
           {to: '/team', label: 'Team', position: 'left'},
-          {to: '/whitepaper', label: 'Whitepaper', position: 'left'},
           {to: '/mailing', label: 'Mailing List', position: 'left'},
           {
             href: 'https://github.com/risc0/risc0',

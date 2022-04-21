@@ -90,7 +90,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/battleship',
+                to: '/docs/tutorial-examples/battleship_rust_tutorial',
               },
             ],
           },

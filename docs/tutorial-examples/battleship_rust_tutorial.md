@@ -1,10 +1,11 @@
 # Battleship on RISC Zero
 
-*revised Apr 18, 2021*
+*revised Apr 18, 2022*
 
+In this Risc Zero tutorial, we introduce a **secure, decentralized version** of [*Battleship*](https://en.wikipedia.org/wiki/Battleship_(game)), using Rust and [Risc Zero's ZKVM](https://github.com/risc0/risc0). To play Battleship on the NEAR network, check out the [Github README](https://github.com/risc0/risc0/tree/main/examples/rust/battleship). 
 ## Summary
 
-In this introduction to RISC Zero's technology we outline how to implement a secure, decentralized version of the game *Battleship* using Rust and RISC Zero's Zero Knowledge Virtual Machine (ZKVM). Battleship relies on each player being able to *conceal* the ships on their private game board from their opponent while receiving *accurate* reports from their opponent on the effect of their shots. In a traditional networked application this would be solved by introducing a trusted server to mediate play and hold the game state, and this is representative of existing traditional computing systems. In this implementation we apply the power of *zero knowledge proofs* (ZKPs) using the ZKVM to build a server-free version of Battleship in Rust. The players each maintain their private game state, yet every step of the game is cryptographically checked to prevent cheating. The patterns in this code may be applied to build new secure, decentralized applications in finance, governance, information security, etc.
+ Battleship relies on each player being able to *conceal* the ships on their private game board from their opponent while receiving *accurate* reports from their opponent on the effect of their shots. In a traditional networked application this would be solved by introducing a trusted server to mediate play and hold the game state, and this is representative of existing traditional computing systems. In this implementation we apply the power of *zero knowledge proofs* (ZKPs) using the Risc Zero *Zero-Knowledge Virtual Machine* (ZKVM) to build a server-free version of Battleship in Rust. The players each maintain their private game state, yet every step of the game is cryptographically checked to prevent cheating. The patterns in this code may be applied to build new secure, decentralized applications in finance, governance, information security, etc.
 
 ## What is RISC Zero?
 

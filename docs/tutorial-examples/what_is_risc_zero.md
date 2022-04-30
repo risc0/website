@@ -1,8 +1,12 @@
 ---
 sidebar_position: 1
 ---
+<!--Author: Choong April 18, 2022
+Edits: Paul April 30, 2022-->
 
 # What is RISC Zero?
+*In this RISC Zero tutorial, we introduce the* **RISC Zero ZKVM**, *an open-source, zero-knowledge virtual machine that allows you to build **trustless, verifiable software** in your favorite languages. <br/>To install RISC Zero on your machine, head to the [risc0 Github README](https://github.com/risc0/risc0#readme). <br/>For a more practical example, check out the Battleship example in the left-hand sidebar.* 
+> WARNING: This software is still experimental, we do not recommend it for production use.
 
 RISC Zero is a startup building the RISC Zero [`zero knowledge virtual machine`](../key-terminology.md) (ZKVM), a major step towards improving the security and trustworthiness of distributed applications. RISC Zero ZKVM (from here on referred to as the "VM") bridges the gap between zero knowledge proof (ZKP) research and widely-supported programming languages such as C++ and Rust. ZKP technology enables programs' output to carry proof of provenance and correct execution that can be cryptographically verified by a receiver without access to the programs' inputs. Stripping away the jargon this means the output of the program can be checked for correctness without seeing the inputs. This verifiability enables decentralization of applications that previously required a trusted third party, a game changer for the resilience and economics of operating the computing infrastructure that we all rely on.
 

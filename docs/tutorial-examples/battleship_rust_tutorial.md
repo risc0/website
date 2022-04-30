@@ -1,24 +1,21 @@
+---
+sidebar_position: 2
+---
+
 # Battleship on RISC Zero
 
-*revised Apr 18, 2022*
+*Revised Apr 18, 2022*
 
-In this Risc Zero tutorial, we introduce a **secure, decentralized version** of [*Battleship*](https://en.wikipedia.org/wiki/Battleship_(game)), using Rust and [Risc Zero's ZKVM](https://github.com/risc0/risc0). To play Battleship on the NEAR network, check out the [Github README](https://github.com/risc0/risc0/tree/main/examples/rust/battleship). 
-## Summary
+*In this RISC Zero tutorial, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's ZKVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/risc0/tree/main/examples/rust/battleship).
 
- Battleship relies on each player being able to *conceal* the ships on their private game board from their opponent while receiving *accurate* reports from their opponent on the effect of their shots. In a traditional networked application this would be solved by introducing a trusted server to mediate play and hold the game state, and this is representative of existing traditional computing systems. In this implementation we apply the power of *zero knowledge proofs* (ZKPs) using the Risc Zero *Zero-Knowledge Virtual Machine* (ZKVM) to build a server-free version of Battleship in Rust. The players each maintain their private game state, yet every step of the game is cryptographically checked to prevent cheating. The patterns in this code may be applied to build new secure, decentralized applications in finance, governance, information security, etc.
 
-## What is RISC Zero?
+## Abstract
 
-RISC Zero is a startup building the RISC Zero ZKVM, a major step towards improving the security and trustworthiness of distributed applications. RISC Zero ZKVM (from here on referred to as the "VM") bridges the gap between zero knowledge proof (ZKP) research and widely-supported programming languages such as C++ and Rust. ZKP technology enables programs' output to carry proof of provenance and correct execution that can be cryptographically verified by a receiver without access to the programs' inputs. Stripping away the jargon this means the output of the program can be checked for correctness without seeing the inputs. This verifiability enables decentralization of applications that previously required a trusted third party, a game changer for the resilience and economics of operating the computing infrastructure that we all rely on.
-
-Foundational work on SNARKs and STARKs shows the potential of ZKP-based compute, but to date building applications has required adopting new programming languages with sparse tooling support. RISC Zero is removing those barriers by bringing existing languages, tools, and developer skills to ZKP development. The way RISC Zero achieves this is by inventing a uniquely high-performance ZKP prover and then using the performance headroom to build a zero knowledge virtual machine (ZKVM) implementing a standard RISC-V instruction set. While difficult, emulating RISC-V makes possible compatibility with existing mature languages and toolchains. In concrete terms this looks like seamless integration between "host" application code written in a high level language running natively on the host processor (e.g. Rust on arm64 Mac) and "guest" code in the same language executing inside our ZKVM (e.g. Rust on RISC-V, specifically RV32IM). This is similar to the very successful pattern used in Nvidia's CUDA C++ toolchain, but with a ZKP engine in place of a GPU.
-
-More detailed technical and theoretical materials are available by request.
-<!-- TODO either release paper or put e-mail address here -->
+ >The game of *Battleship* relies on each player being able to *conceal* the ships on their private game board while receiving *accurate* reports from their opponent on the effect of their shots. In a traditional networked application, this would be solved by introducing a trusted server to mediate play and hold the game state. Relying on a trusted server is the norm in modern computing systems. `RISC Zero offers a scalable, transparent platform for private, verifiable computation -- without relying on a trusted server`. <br/><br/>In RISC Zero's *Battleship,* we apply the power of zero knowledge proofs (ZKPs) using the RISC Zero *Zero-Knowledge Virtual Machine* (ZKVM) to build a `trustless game of Battleship` in Rust. The players each maintain their private game state, yet every step of the game is cryptographically checked to prevent cheating. The patterns in this code may be applied to build new secure, decentralized applications in finance, governance, information security, etc.
 
 ## Battleship gameplay
 
-In this example we'll walk through an implementation of the popular two-player game Battleship. Typically played in person with concealed physical game boards, a networked version of the game relies on each party accurately reporting the results of play based on their private board state. Allowing mutually untrusting players to play together requires a mechanism to gain trust in the integrity of gameplay, while the complexity of the game logic benefits from implementation in a mature high-level language. In this way Battleship is a microcosm of the challenges in implementing more complex multi-party limited trust applications.
+In this example, we'll walk through an implementation of the popular two-player game Battleship. Typically played in person with concealed physical game boards, a networked version of the game relies on each party accurately reporting the results of play based on their private board state. Allowing mutually untrusting players to play together requires a mechanism to gain trust in the integrity of gameplay, while the complexity of the game logic benefits from implementation in a mature high-level language. In this way Battleship is a microcosm of the challenges in implementing more complex multi-party limited trust applications.
 
 ![Servicemen play Battleship aboard the aircraft carrier USS Harry S. Truman](assets/battleship_rust_tutorial/The_Harry_S._Truman_Carrier_Strike_Group_DVIDS285915.jpg)
 
@@ -30,18 +27,18 @@ See [Wikipedia: Battleship_(game)](https://en.wikipedia.org/wiki/Battleship_(gam
 
 ### Security properties
 
-For this implementation of Battleship we'll be providing the following security properties:
+For this implementation of Battleship, we'll be providing the following security properties:
 
 - Each player starts the game with the right set of ships placed on their board, no more or fewer (valid setup).
 - No player changes their ship placement during the game.
 - Each shot acknowledgement contains an accurate report on whether the shell hit a ship and if so whether a ship sunk.
 - Each player's ship placement is confidential during the all message exchanges.
 
-In this implementation the game is implemented as two parallel guessing games, it is not possible to prove the game outcome after the fact. Extending the example to support proving game outcome would make the code a little bit more complicated but wouldn't require any new features from the underlying platform.
+In this implementation, the game is implemented as two parallel guessing games, and it is not possible to prove the game outcome after the fact. Extending the example to support proving game outcome would make the code a little bit more complicated but wouldn't require any new features from the underlying platform.
 
 ## Quick start
 
-To run the example code yourself you'll need a working build of RISC Zero. RISC Zero works on recent Linux, Mac, or Windows and requires around 5GB free space and seven minutes to do a clean build (tested on a MacBook Air). Head over to the main [RISC Zero GitHub repo](https://github.com/risc0/risc0) and follow the instructions in the [README.md](https://github.com/risc0/risc0/blob/main/README.md). 
+To run the example code yourself, you'll need a working build of RISC Zero. RISC Zero works on recent Linux, Mac, or Windows and requires around 5GB free space and seven minutes to do a clean build (tested on a MacBook Air). Head over to the main [RISC Zero GitHub repo](https://github.com/risc0/risc0) and follow the instructions in the [README.md](https://github.com/risc0/risc0/blob/main/README.md). 
 
 Included in the README is the command to run the Battleship Rust example:
 
@@ -74,33 +71,12 @@ test tests::protocol ... ok
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 15.09s
 ```
 
-If you run into any problems feel free to ask on [Discord](https://discord.gg/risczero) and check [GitHub Issues](https://github.com/risc0/risc0/issues).
+If you run into any problems, feel free to ask on [Discord](https://discord.gg/risczero) and check [GitHub Issues](https://github.com/risc0/risc0/issues).
 
-## RISC Zero operation
+## A Trustless, Decentralized Battleship
+Let's peek under the hood at how we use the RISC Zero Virtual Machine (ZKVM) to offer a trustless implementation of Battleship. For definitions of key terms, see our [Key Terminology](../key-terminology.md) page. 
 
-### Key terminology
-
-- *ZKVM* -- a virtual machine that runs trusted code and generates proofs
-- *RISC Zero ZKVM* -- RISC Zero's ZKVM implementation based on the RISC-V architecture
-- *host* -- the system the ZKVM runs on
-- *guest* -- the system running inside the ZKVM
-- *host* program -- the host-native, untrusted portion of an application
-- *prover* -- a program on the host that runs the trusted code to generate a receipt
-- *verifier* -- a program on the host that verifies receipts
-- *method* -- a single 'main' entry point for code that runs inside the ZKVM
-- *execute* -- run a method inside the ZKVM and produce a receipt of correct execution
-- *commit* -- append data to the journal
-- *receipt* -- a record of correct execution, consisting of:
-  - *method ID* -- a small unique identifier that identifies a method
-  - *journal* -- all the things the method wants to publicly output and commit to, written to by the method, attached to receipt
-  - *seal* -- the cryptographic blob which proves that the receipt is valid
-- *verify* -- check that the receipt is valid, i.e. verify the seal
-- theoretical nomenclature used in papers and internals of RISC Zero's ZKVM implementation
-  - *proof* -- the seal
-  - *circuit* -- a mathematical construct that appears in one view as the "CPU" in the ZKVM but on the other is part of the computation used to create proofs
-
-### Operation overview
-
+### The RISC Zero ZKVM
 ```mermaid
 flowchart LR
     subgraph AA [Host A]
@@ -136,9 +112,9 @@ flowchart LR
     classDef SecureBox fill:teal
 ```
 
-The key thing verifiable computation brings to decentralized apps is the ability to distribute trusted logic across peers without relying on a server. Within RISC Zero's approach this is done by putting that logic into an embedded program called the *guest* that runs within a ZKVM hosted inside the user-facing application. During operation a host program *executes* *methods* on the *guest* to manipulate the guest's internal state. As the guest program executes it may *commit* outputs to transmit to the *journal*. When execution finishes the ZKVM returns to the host program a *receipt* containing the committed journal items along with a cryptographic *seal* that proves the integrity of the result. This receipt can then be sent across a network to another host where the receipt may be checked by the *verifier* and used for further computation.
+The key thing verifiable computation brings to decentralized apps is the ability to distribute trusted logic across peers without relying on a server. Within RISC Zero's approach this is done by putting that logic into an embedded program called the *guest* that runs within a ZKVM hosted inside the user-facing application. During operation, a host program *executes* *methods* on the *guest* to manipulate the guest's internal state. As the guest program executes it may *commit* outputs to transmit to the *journal*. When execution finishes, the ZKVM returns to the host program a *receipt* containing the committed journal items along with a cryptographic *seal* that proves the integrity of the result. This receipt can then be sent across a network to another host where the receipt may be checked by the *verifier* and used for further computation.
 
-To see this in action let's look at the Battleship implementation.
+To see this in action, let's look at the Battleship implementation.
 
 ## Battleship on RISC Zero ZKVM
 
@@ -429,4 +405,4 @@ More likely, an adversary will attempt to construct a valid `RoundMessage` that 
 
 ## Closing
 
-Hopefully this is a useful introduction to how ZKPs and specifically RISC Zero can be used to build trustworthy distributed applications. There are a growing set of [examples](https://github.com/risc0/risc0/tree/main/examples) in C++ and Rust. If you run into any problems feel free to ask on [Discord](https://discord.gg/risczero) and check [GitHub Issues](https://github.com/risc0/risc0/issues).
+Hopefully, this is a useful introduction to how ZKPs and specifically RISC Zero can be used to build trustworthy distributed applications. There are a growing set of [examples](https://github.com/risc0/risc0/tree/main/examples) in C++ and Rust. If you run into any problems feel free to ask on [Discord](https://discord.gg/risczero) and check [GitHub Issues](https://github.com/risc0/risc0/issues).

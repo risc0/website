@@ -69,7 +69,7 @@ const config = {
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'tutorial-examples/what_is_risc_zero',
             position: 'left',
             label: 'Tutorial',
           },

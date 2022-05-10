@@ -27,8 +27,8 @@ export default function Home() {
     <Layout
       title={`${siteConfig.title} : General-Purpose Verifiable Computing`}
       description="Zero-Knowledge powered VM based on the RISC-V instruction set.">
-      <img className={styles.large} style={{width : '100%'}} src={require('@site/static/img/banner.png').default} alt="Risc0 Logo"/>
-      <img className={styles.small} style={{width : '100%'}} src={require('@site/static/img/banner-small.png').default} alt="Risc0 Logo"/>
+      <img className={styles.large} style={{width : '100%', background: 'black'}} src={require('@site/static/img/banner.png').default} alt="Risc0 Logo"/>
+      <img className={styles.small} style={{width : '100%', background: 'black'}} src={require('@site/static/img/banner-small.png').default} alt="Risc0 Logo"/>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

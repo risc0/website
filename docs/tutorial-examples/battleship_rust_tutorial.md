@@ -6,7 +6,7 @@ sidebar_position: 2
 
 *Revised Apr 18, 2022*
 
-*In this RISC Zero tutorial, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's ZKVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/risc0/tree/main/examples/rust/battleship).
+*In this RISC Zero tutorial, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's ZKVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/battleship-example).
 
 
 ## Abstract
@@ -38,13 +38,14 @@ In this implementation, the game is implemented as two parallel guessing games, 
 
 ## Quick start
 
-To run the example code yourself, you'll need a working build of RISC Zero. RISC Zero works on recent Linux, Mac, or Windows and requires around 5GB free space and seven minutes to do a clean build (tested on a MacBook Air). Head over to the main [RISC Zero GitHub repo](https://github.com/risc0/risc0) and follow the instructions in the [README.md](https://github.com/risc0/risc0/blob/main/README.md). 
+To run the example code yourself, you'll need a working build of RISC Zero. RISC Zero works on recent Linux, Mac, or Windows and requires around 5GB free space and seven minutes to do a clean build (tested on a MacBook Air). Head over to the battleship example [GitHub repo](https://github.com/risc0/battleship-example) and follow the instructions in the README.
 
-Included in the README is the command to run the Battleship Rust example:
+Included in the README are the commands to run the Battleship Rust example tests:
 
 ```
 
-RISC0_LOG=1 bazelisk run //examples/rust/battleship:test
+cargo run --bin risc0-build-methods
+RISC0_LOG=1 cargo test --release -p battleship-core
 
 ```
 
@@ -170,18 +171,15 @@ flowchart TB
     classDef SecureBox fill:teal
 ```
 
-Each turn a player fires a shot and the opponent responds, with game logic running inside a ZKVM players are able to verify the accuracy of each response. The code implementing this lives in the [risc0 repo](https://github.com/risc0/risc0) under [examples/rust/battleship](https://github.com/risc0/risc0/tree/battleship-tutorial/examples/rust/battleship). 
+Each turn a player fires a shot and the opponent responds, with game logic running inside a ZKVM players are able to verify the accuracy of each response. The code implementing this lives in the [battleship-example repo](https://github.com/risc0/battleship-example).
 
-- README.md -- overview & build instructions
-- BUILD.bazel -- Bazel build rules for the host code.
-- src/lib.rs -- The overall flow of the game turns is here, along with the Cargo functional tests. This could be extended a GUI interface etc.
-- src/main.rs -- A placeholder for now.
-- core/BUILD.bazel -- Bazel build rules for the guest code (trusted game logic).
-- core/src/lib.rs -- The game logic is here, along with functions for checking validity of game boards, and some unit tests for game logic.
-- core/src/bin/init.rs -- The ZKVM guest method for initializing game state.
-- core/src/bin/turn.rs -- The ZKVM guest method for processing gameplay messages.
+- `README.md` -- overview & build instructions
+- `core/tests/integration_test.rs` -- This tutorial will analyze the game flow defined in this integration test.
+- `core/src/lib.rs` -- The game logic is here, along with 'methods' for checking validity of game boards, and some unit tests for game logic.
+- `methods/guest/src/bin/init.rs` -- The ZKVM guest method for initializing game state.
+- `methods/guest/src/bin/turn.rs` -- The ZKVM guest method for processing gameplay messages.
 
-You can cross-reference the usage of our Rust API with the host-side API implementation in [risc0/zkvm/sdk/rust/host/src/lib.rs](https://github.com/risc0/risc0/blob/main/risc0/zkvm/sdk/rust/host/src/lib.rs). Thanks to the single-language approach the types and logic in core/src/lib.rs can be used in both the guest code and host code even though they deploy to different instruction sets and in very different environments. 
+The Rust API documentation for the `risc0-zkvm-host` crate is available on `docs.rs` here: https://docs.rs/risc0-zkvm-host/latest/risc0_zkvm_host/. Thanks to the single-language approach the types and logic in `core/src/lib.rs` can be used in both the guest code and host code even though they deploy to different instruction sets and in very different environments. 
 
 ### Valid Setup
 
@@ -207,7 +205,7 @@ sequenceDiagram
     %% John-->>-Alice: I feel great!
 ```
 
-The main source for the host program that runs the game is located in [`src/lib.rs`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs). Each instance is built around a core `Battleship` [`src/lib.rs:34`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L34) struct that holds the local game state and a `Digest` of the opponent's game state.
+The source for the host program that runs the game is located in [`core/tests/integration_test.rs`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs). Each instance is built around a core `Battleship` [`core/tests/integration_test.rs:41`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L41) struct that holds the local game state and a `Digest` of the opponent's game state.
 
 ```
 pub struct Battleship {
@@ -217,9 +215,9 @@ pub struct Battleship {
 }
 ```
 
-To initialize Alice creates GameState with ship placements, then calls .init() to produce the InitMessage to send to Bob.
+To initialize Alice creates `GameState` with ship placements, then calls `.init()` to produce the `InitMessage` to send to Bob.
 
-[`src/lib.rs:182`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L182)
+[`core/tests/integration_test.rs:226`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L226)
 
 ```
         let alice_state = GameState {
@@ -237,9 +235,10 @@ To initialize Alice creates GameState with ship placements, then calls .init() t
         alice.init();  // produces InitMessage
 ```
 
-Here's what an InitMessage looks like. Note it's just a receipt of the opposing board state, it doesn't contain the board itself!
+Here's what an `InitMessage` looks like. Note it's just a receipt of the opposing board state, it doesn't contain the board itself!
 
-[`src/lib.rs:20`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L20)
+[`core/tests/integration_test.rs:27`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L27)
+
 ```
 pub struct InitMessage {
     receipt: Receipt,
@@ -248,20 +247,29 @@ pub struct InitMessage {
 
 This is important because this allows Alice to prove to Bob her board is set up fairly without sharing the contents. Instead of sharing the board the receipt only tells Bob that the board was verified to have valid (fair) ship placement. Let's look at how that happens. Alice's instance of the host program does this by calling `Battleship.init()` to generate an `InitMessage`, then sends the result to Bob. 
 
-[`src/lib.rs:63`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L63)
+[`core/tests/integration_test.rs:70`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L70)
 
 ```
     pub fn init(&self) -> Result<InitMessage> {
-        let mut prover = Prover::new("examples/rust/battleship/core/init")?;
+        let temp_dir = tempdir().unwrap();
+        let init_id = temp_dir
+            .path()
+            .join("init.id")
+            .to_str()
+            .unwrap()
+            .to_string();
+
+        fs::write(&init_id, INIT_ID).unwrap();        
+        let mut prover = Prover::new(INIT_PATH, &init_id)?;
         let vec = to_vec(&self.state).unwrap();
         prover.add_input(vec.as_slice())?;
         let receipt = prover.run()?;
         Ok(InitMessage { receipt })
     }
 ```
-The magic is in how the message gets constructed. To see what is happening we follow the `prover.run()` call to the `.../core/init` guest method which maps to execution of the `core/src/bin/init.rs:main()`:
+The magic is in how the message gets constructed. To see what is happening we follow the `prover.run()` call to the `init` guest method which maps to execution of the `core/src/bin/init.rs:main()`:
 
-[`core/src/bin/init.rs:24`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/core/src/bin/init.rs#L24)
+[`methods/guest/src/bin/init.rs:24`](https://github.com/risc0/battleship-example/blob/main/methods/guest/src/bin/init.rs#L24)
 
 ```
 pub fn main() {
@@ -273,27 +281,39 @@ pub fn main() {
 }
 ```
 
-It's important to understand that this code runs inside the ZKVM. The ZKVM API serializes the `GameState`, boots the `.../core/init` code inside a new ZKVM, and our libraries then receive and deserialize the data for use by an app's guest-side logic. Conveniently, because the host and guest are written in the same language they can actually share source code. Once running, the guest code checks the `GameState` for validity according to the logic in `GameState.check()` ([`core/src/lib.rs:89`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/core/src/lib.rs#L89)) and then `commit`s the ZKVM's state, generating a receipt for transmission to Bob.
+It's important to understand that this code runs inside the ZKVM. The ZKVM API serializes the `GameState`, boots the `init` code inside a new ZKVM, and our libraries then receive and deserialize the data for use by an app's guest-side logic. Conveniently, because the host and guest are written in the same language they can actually share source code. Once running, the guest code checks the `GameState` for validity according to the logic in `GameState.check()` ([`core/src/lib.rs:141`](https://github.com/risc0/battleship-example/blob/main/core/src/lib.rs#L141)) and then `commit`s the ZKVM's state, generating a receipt for transmission to Bob.
 
-When Bob receives the `InitMessage` from Alice his Battleship passes it to the `on_init_message()` message handler (below). This verifies the integrity of the message and if it is valid stores the `Digest`. The host-side portion of the code is brief, and unlike on the send side the actual `.../core/init` method is never run. Instead the RISC Zero verifier checks only that the receipt is the output of a valid execution of the `.../core/init` method.
+When Bob receives the `InitMessage` from Alice his Battleship passes it to the `on_init_message()` message handler (below). This verifies the integrity of the message and if it is valid stores the `Digest`. The host-side portion of the code is brief, and unlike on the send side the actual `init` method is never run. Instead, the RISC Zero verifier checks only that the receipt is the output of a valid execution of the `init` method.
+
+[`core/tests/integration_test.rs:87`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L87)
 
 ```
     pub fn on_init_msg(&mut self, msg: &InitMessage) -> Result<()> {
         log::info!("on_init_msg");
-        msg.receipt.verify("examples/rust/battleship/core/init")?;
+
+        let temp_dir = tempdir().unwrap();
+        let init_id = temp_dir
+            .path()
+            .join("init.id")
+            .to_str()
+            .unwrap()
+            .to_string();
+        fs::write(&init_id, INIT_ID).unwrap();
+
+        msg.receipt.verify(&init_id)?;
         self.peer_state = msg.get_state()?;
         log::info!("  peer_state: {:?}", self.peer_state);
         Ok(())
     }
 ```
 
-Bob generates and returns an InitMessage, which Alice verifies in the same way, and play can begin.
+Bob generates and returns an `InitMessage`, which Alice verifies in the same way, and play can begin.
 
 ### Valid turn
 
 Once the game is set up fairly the next property to ensure is that turns are processed fairly. The initialization process above gives a good idea about the general way the ZKVM and receipts are used, but turns add new wrinkles. Alice starts a turn by creating a `TurnMessage` containing a shot as described by coordinates to shell. This does not pass through the ZKVM but we do store the shot for future reference.
 
-[`src/lib.rs:79`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L79)
+[`core/tests/integration_test.rs:105`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L105)
 ```
     pub fn turn(&mut self, x: u32, y: u32) -> TurnMessage {
         let shot = Position::new(x, y);
@@ -302,13 +322,23 @@ Once the game is set up fairly the next property to ensure is that turns are pro
     }
 ```
 
-When Bob receives the TurnMessage he passes it to `on_turn_msg()`:
+When Bob receives the `TurnMessage` he passes it to `on_turn_msg()`:
 
-[`src/lib.rs:86`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L86)
+[`core/tests/integration_test.rs:112`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L112)
 ```
     pub fn on_turn_msg(&mut self, msg: &TurnMessage) -> Result<RoundMessage> {
         let params = RoundParams::new(self.state.clone(), msg.shot.x, msg.shot.y);
-        let mut prover = Prover::new("examples/rust/battleship/core/turn")?;
+
+        let temp_dir = tempdir().unwrap();
+        let turn_id = temp_dir
+            .path()
+            .join("turn.id")
+            .to_str()
+            .unwrap()
+            .to_string();
+        fs::write(&turn_id, TURN_ID).unwrap();
+
+        let mut prover = Prover::new(TURN_PATH, &turn_id)?;
         let vec = to_vec(&params).unwrap();
         prover.add_input(vec.as_slice())?;
         let receipt = prover.run()?;
@@ -319,7 +349,7 @@ When Bob receives the TurnMessage he passes it to `on_turn_msg()`:
     }
 ```
 
-This processes the shot coordinates inside the ZKVM by the logic in `RoundParams.process()` ([core/src/lib.rs#L130](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/core/src/lib.rs#L130)). This checks for a ship hit and ultimately commits a `RoundResult` similar to below to the receipt:
+This processes the shot coordinates inside the ZKVM by the logic in `RoundParams.process()` ([core/src/lib.rs#L165](https://github.com/risc0/battleship-example/blob/main/core/src/lib.rs#L165)). This checks for a ship hit and ultimately commits a `RoundResult` similar to below to the receipt:
 
 ```
     RoundResult {
@@ -330,12 +360,24 @@ This processes the shot coordinates inside the ZKVM by the logic in `RoundParams
 
 Bob sends the `RoundResult` and receipt back to Alice, where it is checked inside `on_round_msg()`.
 
-[`src/lib.rs:99`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L99)
+[`core/tests/integration_test.rs:135`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L135)
 
 ```
     pub fn on_round_msg(&mut self, msg: &RoundMessage) -> Result<HitType> {
-        msg.receipt.verify("examples/rust/battleship/core/turn")?;
+        log::info!("on_round_msg");
+
+        let temp_dir = tempdir().unwrap();
+        let turn_id = temp_dir
+            .path()
+            .join("turn.id")
+            .to_str()
+            .unwrap()
+            .to_string();
+        fs::write(&turn_id, TURN_ID).unwrap();
+
+        msg.receipt.verify(&turn_id)?;
         let commit = msg.get_commit()?;
+        log::info!("  commit: {:?}", commit);
 
         if commit.old_state != self.peer_state {
             return Err(Exception::new(
@@ -363,36 +405,39 @@ Bob sends the `RoundResult` and receipt back to Alice, where it is checked insid
     }
 ```
 
-Similar to the initialization process, the key thing to keep in mind in this part of the code is that Alice checks only that the receipt results from a valid execution of `.../core/turn` and does not actually get the board state. By ensuring fair setup and valid turn, Alice and Bob may trust that they are playing a fair game without in any way trusting each other.
+Similar to the initialization process, the key thing to keep in mind in this part of the code is that Alice checks only that the receipt results from a valid execution of `turn` and does not actually get the board state. By ensuring fair setup and valid turn, Alice and Bob may trust that they are playing a fair game without in any way trusting each other.
 
 ### Example: Corrupt message
 
-An adversary might as part of attacking this system attempt to constructing a receipt that is corrupt in some way. Receipts go through an extensive set of checks leading up to the proof verification making any modified message highly unlikely to verify. The details are beyond the scope of this tutorial but curious readers may find the implementation of the checks in [`risc0/zkp/verify/verify.cpp`](https://github.com/risc0/risc0/blob/battleship-tutorial/risc0/zkp/verify/verify.cpp#L27).
+An adversary might as part of attacking this system attempt to construct a receipt that is corrupt in some way. Receipts go through an extensive set of checks leading up to the proof verification making any modified message highly unlikely to verify. The details are beyond the scope of this tutorial but curious readers may find the implementation of the checks in [`risc0/zkp/verify/verify.cpp`](https://github.com/risc0/risc0/blob/battleship-tutorial/risc0/zkp/verify/verify.cpp#L27).
 
 <!-- TODO should we elaborate here? -->
 
 ### Example: Player falsifies a `RoundMessage`
 
-More likely, an adversary will attempt to construct a valid `RoundMessage` that gives them some advantage. The most obvious form of falsified `RoundMessage` would be to falsely claim a miss when in fact there was a hit. There are a few ways someone might attempt this, annotated on belowe abbreviated code from the example. 
+More likely, an adversary will attempt to construct a valid `RoundMessage` that gives them some advantage. The most obvious form of falsified `RoundMessage` would be to falsely claim a miss when in fact there was a hit. There are a few ways someone might attempt this, annotated on below abbreviated code from the example.
 
 1. If this is attempted by some kind of tampering with the raw receipt then the receipt verification will fail immediately. 
 2. If instead the `RoundMessage` contains a valid receipt for the wrong game state, say a new board where the shot in question hits an empty cell or a replay from an earlier turn, then the included `old_state` will not match the saved `peer_state`. 
 3. Finally, if the `RoundMessage` contains a valid response for the correct game board but the shot coordinates were tampered with before checking for a hit, the `last_shot` won't match.
 
-[`src/lib.rs:99`](https://github.com/risc0/risc0/blob/battleship-tutorial/examples/rust/battleship/src/lib.rs#L99)
+[`core/tests/integration_test.rs:135`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L135)
 
 ```
     pub fn on_round_msg(&mut self, msg: &RoundMessage) -> Result<HitType> {
-        msg.receipt.verify("examples/rust/battleship/core/turn")?;  // <-- 1. Tampering with the receipt fails here
-        
+        // 1. Tampering with the receipt fails here
+        msg.receipt.verify("examples/rust/battleship/core/turn")?;
+
         ...
 
-        if commit.old_state != self.peer_state {  // 2. Replying for the wrong game board, or stale game state
+        // 2. Replying for the wrong game board, or stale game state
+        if commit.old_state != self.peer_state {
             return Err(Exception::new(
 
         ...
 
-        if commit.shot != self.last_shot {  // 3. Replying for right game state but wrong shot coordinates
+        // 3. Replying for right game state but wrong shot coordinates
+        if commit.shot != self.last_shot {
             return Err(Exception::new(
 
         ...

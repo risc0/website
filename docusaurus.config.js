@@ -66,17 +66,49 @@ const config = {
           src: 'img/logo.png',
         },
         items: [
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            type: 'dropdown',
+            position: 'left',
+            label: 'About',
+            items: [
+              {label: 'Meet the Team',
+              to: '/team'
+              },
+              {label: 'About the zkVM',
+              to: 'docs/explainers/zkvm/what_is_risc_zero'
+              },
+              {label: 'About the Proof System',
+              to: 'docs/explainers/proof-system/proof-system-sequence-diagram'
+              }
+            ]
+          },
+          {
+            type: 'dropdown',
+            position: 'left',
+            label: 'Get Started',
+            items: [
+              {label: 'Install the zkVM',
+              to: 'http://www.github.com/risc0/risc0'
+              },
+              {label: 'Hello World on Rust',
+              to: 'https://github.com/risc0/risc0-rust-starter'
+              },
+              {label: 'RISC Zero Battleship',
+              to: 'https://github.com/risc0/battleship-example'
+              },
+              {label: 'Rust Crates', 
+              to: 'https://crates.io/search?q=risc0&sort=recent-updates'
+              }
+            ]
+          },
           {
             type: 'doc',
-            docId: 'tutorial-examples/what_is_risc_zero',
+            docId: 'key-terminology',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Terminology',
           },
-          {to: '/team', label: 'Team', position: 'left'},
-          {to: '/mailing', label: 'Mailing List', position: 'left'},
           {
-            href: 'https://github.com/risc0/risc0',
+            href: 'https://github.com/Risc0',
             label: 'GitHub',
             position: 'right',
           },
@@ -86,12 +118,16 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Stay Informed',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/tutorial-examples/battleship_rust_tutorial',
+                label: 'Mailing List',
+                to: 'mailing',
               },
+              {
+                label: 'Blog',
+                to: '/blog'
+              }
             ],
           },
           {
@@ -112,15 +148,15 @@ const config = {
             ],
           },
           {
-            title: 'More',
+            title: 'Contribute',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Codebase',
+                to: 'https://github.com/risc0/',
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/risc0/risc0',
+                label: 'Website',
+                href: 'https://github.com/risc0/website',
               },
             ],
           },

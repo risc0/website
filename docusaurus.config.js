@@ -94,7 +94,7 @@ const config = {
               to: 'https://github.com/risc0/battleship-example'
               },
               {label: 'Rust Crates', 
-              to: 'https://crates.io/search?q=risc0&sort=recent-updates'
+              to: 'https://github.com/risc0/risc0#rust-crates'
               },
               {label: 'Contribute to RISC Zero',
               to: 'http://www.github.com/risc0/risc0'

@@ -87,9 +87,6 @@ const config = {
             position: 'left',
             label: 'Get Started',
             items: [
-              {label: 'Install the zkVM',
-              to: 'http://www.github.com/risc0/risc0'
-              },
               {label: 'Hello World on Rust',
               to: 'https://github.com/risc0/risc0-rust-starter'
               },
@@ -98,6 +95,9 @@ const config = {
               },
               {label: 'Rust Crates', 
               to: 'https://crates.io/search?q=risc0&sort=recent-updates'
+              },
+              {label: 'Contribute to RISC Zero',
+              to: 'http://www.github.com/risc0/risc0'
               }
             ]
           },

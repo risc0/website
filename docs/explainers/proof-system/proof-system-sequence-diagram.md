@@ -4,7 +4,7 @@
 
 *In this document, we present a succinct introduction to the RISC Zero Proof system, including a sequence diagram and a step-by-step description of the RISC Zero Non-Interactive Argument of Knowledge. We encourage readers to follow along with the [Fibonacci Trace Example](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) for a more concrete description of the protocol.*
 
-*To invite collaboration and open source development, this is an early-release of documentation-in-progress. The implementation in code can be seen [here](https://github.com/risc0/risc0/blob/main/risc0/zkp/prove/prove.cpp). If you have questions/feedback or if you find errors, please let us know on Twitter or Discord.*
+*To invite collaboration and open source development, this is an early-release of documentation-in-progress. The implementation in code can be seen [here](https://github.com/risc0/risc0/blob/v0.7.2/risc0/zkp/prove/prove.cpp). If you have questions/feedback or if you find errors, please let us know on Twitter or Discord.*
 
 ```mermaid
 sequenceDiagram

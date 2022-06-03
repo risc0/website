@@ -6,7 +6,7 @@ sidebar_position: 2
 
 *Revised June 1, 2022*
 
-*In this RISC Zero tutorial, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's ZKVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/battleship-example).
+*In this document, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's ZKVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/battleship-example).
 
 
 ## Abstract

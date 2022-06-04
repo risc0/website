@@ -6,12 +6,12 @@ sidebar_position: 2
 
 *Revised June 1, 2022*
 
-*In this document, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's ZKVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/battleship-example).
+*In this document, we introduce a **secure, decentralized version** of* [Battleship](https://en.wikipedia.org/wiki/Battleship_(game)), *using Rust and* [RISC Zero's zkVM](https://github.com/risc0/risc0). *To play Battleship on the NEAR network, check out the* [Github README](https://github.com/risc0/battleship-example).
 
 
 ## Abstract
 
- >The game of *Battleship* relies on each player being able to *conceal* the ships on their private game board while receiving *accurate* reports from their opponent on the effect of their shots. In a traditional networked application, this would be solved by introducing a trusted server to mediate play and hold the game state. Relying on a trusted server is the norm in modern computing systems. `RISC Zero offers a scalable, transparent platform for private, verifiable computation -- without relying on a trusted server`. <br/><br/>In RISC Zero's *Battleship,* we apply the power of zero knowledge proofs (ZKPs) using the RISC Zero *Zero-Knowledge Virtual Machine* (ZKVM) to build a `trustless game of Battleship` in Rust. The players each maintain their private game state, yet every step of the game is cryptographically checked to prevent cheating. The patterns in this code may be applied to build new secure, decentralized applications in finance, governance, information security, etc.
+ >The game of *Battleship* relies on each player being able to *conceal* the ships on their private game board while receiving *accurate* reports from their opponent on the effect of their shots. In a traditional networked application, this would be solved by introducing a trusted server to mediate play and hold the game state. Relying on a trusted server is the norm in modern computing systems. `RISC Zero offers a scalable, transparent platform for private, verifiable computation -- without relying on a trusted server`. <br/><br/>In RISC Zero's *Battleship,* we apply the power of zero knowledge proofs (ZKPs) using the RISC Zero *Zero-Knowledge Virtual Machine* (zkVM) to build a `trustless game of Battleship` in Rust. The players each maintain their private game state, yet every step of the game is cryptographically checked to prevent cheating. The patterns in this code may be applied to build new secure, decentralized applications in finance, governance, information security, etc.
 
 ## Battleship gameplay
 
@@ -75,34 +75,34 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 If you run into any problems, feel free to ask on [Discord](https://discord.gg/risczero) and check [GitHub Issues](https://github.com/risc0/risc0/issues).
 
 ## A Trustless, Decentralized Battleship
-Let's peek under the hood at how we use the RISC Zero Virtual Machine (ZKVM) to offer a trustless implementation of Battleship. For definitions of key terms, see our [Key Terminology](../../key-terminology.md) page. 
+Let's peek under the hood at how we use the RISC Zero Virtual Machine (zkVM) to offer a trustless implementation of Battleship. For definitions of key terms, see our [Key Terminology](../../key-terminology.md) page. 
 
-### The RISC Zero ZKVM
+### The RISC Zero zkVM
 ```mermaid
 flowchart LR
     subgraph AA [Host A]
         direction LR
         subgraph AA.A [App Code]
         end
-        subgraph AA.B [ZKVM]
+        subgraph AA.B [zkVM]
             subgraph AA.C [Trusted Code]
             end
         end
         class AA.B SecureBox
         %% class must be applied after object defined!
-        AA.A <-- ZKVM host API --> AA.C
+        AA.A <-- zkVM host API --> AA.C
     end
 
     subgraph BB [Host B]
         direction LR
         subgraph BB.A [App Code]
         end
-        subgraph BB.B [ZKVM]
+        subgraph BB.B [zkVM]
             subgraph BB.C [Trusted Code]
             end
         end
         class BB.B SecureBox
-        BB.A <-- ZKVM host API --> BB.C
+        BB.A <-- zkVM host API --> BB.C
     end
 
     AA.A <-- encapsulated messages ---> BB.A
@@ -113,11 +113,11 @@ flowchart LR
     classDef SecureBox fill:teal
 ```
 
-The key thing verifiable computation brings to decentralized apps is the ability to distribute trusted logic across peers without relying on a server. Within RISC Zero's approach this is done by putting that logic into an embedded program called the *guest* that runs within a ZKVM hosted inside the user-facing application. During operation, a host program *executes* *methods* on the *guest* to manipulate the guest's internal state. As the guest program executes it may *commit* outputs to transmit to the *journal*. When execution finishes, the ZKVM returns to the host program a *receipt* containing the committed journal items along with a cryptographic *seal* that proves the integrity of the result. This receipt can then be sent across a network to another host where the receipt may be checked by the *verifier* and used for further computation.
+The key thing verifiable computation brings to decentralized apps is the ability to distribute trusted logic across peers without relying on a server. Within RISC Zero's approach this is done by putting that logic into an embedded program called the *guest* that runs within a zkVM hosted inside the user-facing application. During operation, a host program *executes* *methods* on the *guest* to manipulate the guest's internal state. As the guest program executes it may *commit* outputs to transmit to the *journal*. When execution finishes, the zkVM returns to the host program a *receipt* containing the committed journal items along with a cryptographic *seal* that proves the integrity of the result. This receipt can then be sent across a network to another host where the receipt may be checked by the *verifier* and used for further computation.
 
 To see this in action, let's look at the Battleship implementation.
 
-## Battleship on RISC Zero ZKVM
+## Battleship on RISC Zero zkVM
 
 As mentioned earlier a traditional pre-ZKP approach to building networked Battleship would be to have both players send commands to a trusted server that runs the game logic.
 
@@ -148,7 +148,7 @@ In contrast in the server-free version using ZKPs the clients communicate direct
 flowchart TB
     subgraph AA [Player A]
         AA.D[Game UI]
-        subgraph AA.B[ZKVM]
+        subgraph AA.B[zkVM]
             AA.A[Player A board]
             AA.C[game logic]
             AA.A o--o AA.C
@@ -157,7 +157,7 @@ flowchart TB
     end
 
     subgraph BB [Player B]
-        subgraph BB.B[ZKVM]
+        subgraph BB.B[zkVM]
             BB.A[Player B board]
             BB.C[game logic]
             BB.A o--o BB.C
@@ -171,15 +171,15 @@ flowchart TB
     classDef SecureBox fill:teal
 ```
 
-Each turn a player fires a shot and the opponent responds, with game logic running inside a ZKVM players are able to verify the accuracy of each response. The code implementing this lives in the [battleship-example repo](https://github.com/risc0/battleship-example).
+Each turn a player fires a shot and the opponent responds, with game logic running inside a zkVM players are able to verify the accuracy of each response. The code implementing this lives in the [battleship-example repo](https://github.com/risc0/battleship-example).
 
 - `README.md` -- overview & build instructions
 - `core/tests/integration_test.rs` -- This tutorial will analyze the game flow defined in this integration test.
 - `core/src/lib.rs` -- The game logic is here, along with 'methods' for checking validity of game boards, and some unit tests for game logic.
-- `methods/guest/src/bin/init.rs` -- The ZKVM guest method for initializing game state.
-- `methods/guest/src/bin/turn.rs` -- The ZKVM guest method for processing gameplay messages.
+- `methods/guest/src/bin/init.rs` -- The zkVM guest method for initializing game state.
+- `methods/guest/src/bin/turn.rs` -- The zkVM guest method for processing gameplay messages.
 
-The Rust API documentation for the `risc0-zkvm-host` crate is available on `docs.rs` here: https://docs.rs/risc0-zkvm-host/latest/risc0_zkvm_host/. Thanks to the single-language approach the types and logic in `core/src/lib.rs` can be used in both the guest code and host code even though they deploy to different instruction sets and in very different environments. 
+The Rust API documentation for the `risc0-zkVM-host` crate is available on `docs.rs` here: https://docs.rs/risc0-zkVM-host/latest/risc0_zkVM_host/. Thanks to the single-language approach the types and logic in `core/src/lib.rs` can be used in both the guest code and host code even though they deploy to different instruction sets and in very different environments. 
 
 ### Valid Setup
 
@@ -281,7 +281,7 @@ pub fn main() {
 }
 ```
 
-It's important to understand that this code runs inside the ZKVM. The ZKVM API serializes the `GameState`, boots the `init` code inside a new ZKVM, and our libraries then receive and deserialize the data for use by an app's guest-side logic. Conveniently, because the host and guest are written in the same language they can actually share source code. Once running, the guest code checks the `GameState` for validity according to the logic in `GameState.check()` ([`core/src/lib.rs:141`](https://github.com/risc0/battleship-example/blob/main/core/src/lib.rs#L141)) and then `commit`s the ZKVM's state, generating a receipt for transmission to Bob.
+It's important to understand that this code runs inside the zkVM. The zkVM API serializes the `GameState`, boots the `init` code inside a new zkVM, and our libraries then receive and deserialize the data for use by an app's guest-side logic. Conveniently, because the host and guest are written in the same language they can actually share source code. Once running, the guest code checks the `GameState` for validity according to the logic in `GameState.check()` ([`core/src/lib.rs:141`](https://github.com/risc0/battleship-example/blob/main/core/src/lib.rs#L141)) and then `commit`s the zkVM's state, generating a receipt for transmission to Bob.
 
 When Bob receives the `InitMessage` from Alice his Battleship passes it to the `on_init_message()` message handler (below). This verifies the integrity of the message and if it is valid stores the `Digest`. The host-side portion of the code is brief, and unlike on the send side the actual `init` method is never run. Instead, the RISC Zero verifier checks only that the receipt is the output of a valid execution of the `init` method.
 
@@ -311,7 +311,7 @@ Bob generates and returns an `InitMessage`, which Alice verifies in the same way
 
 ### Valid turn
 
-Once the game is set up fairly the next property to ensure is that turns are processed fairly. The initialization process above gives a good idea about the general way the ZKVM and receipts are used, but turns add new wrinkles. Alice starts a turn by creating a `TurnMessage` containing a shot as described by coordinates to shell. This does not pass through the ZKVM but we do store the shot for future reference.
+Once the game is set up fairly the next property to ensure is that turns are processed fairly. The initialization process above gives a good idea about the general way the zkVM and receipts are used, but turns add new wrinkles. Alice starts a turn by creating a `TurnMessage` containing a shot as described by coordinates to shell. This does not pass through the zkVM but we do store the shot for future reference.
 
 [`core/tests/integration_test.rs:105`](https://github.com/risc0/battleship-example/blob/main/core/tests/integration_test.rs#L105)
 ```
@@ -349,7 +349,7 @@ When Bob receives the `TurnMessage` he passes it to `on_turn_msg()`:
     }
 ```
 
-This processes the shot coordinates inside the ZKVM by the logic in `RoundParams.process()` ([core/src/lib.rs#L165](https://github.com/risc0/battleship-example/blob/main/core/src/lib.rs#L165)). This checks for a ship hit and ultimately commits a `RoundResult` similar to below to the receipt:
+This processes the shot coordinates inside the zkVM by the logic in `RoundParams.process()` ([core/src/lib.rs#L165](https://github.com/risc0/battleship-example/blob/main/core/src/lib.rs#L165)). This checks for a ship hit and ultimately commits a `RoundResult` similar to below to the receipt:
 
 ```
     RoundResult {

@@ -6,7 +6,7 @@ STARKs are a highly technical process - an innovation in the world of zero-knowl
 
 ## Documentation
 
-To get started in making sense of the RISC Zero STARK, start with the [RISC Zero Proof System Sequence Diagram + IOP Description](docs/explainers/../../about-proof-system.md) and the [Fibonacci Trace Validation](https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ1J5PcS2op_vrGtbK5Mif0gAN6wbAaTSWTHy2vuFtfbtqbI_dRqpalNamNjjUcyqD7hDPJRgI2cG-/pubhtml#) example. 
+To get started in making sense of the RISC Zero STARK, start with the [RISC Zero Proof System Sequence Diagram + IOP Description](../explainers/proof-system/proof-system-sequence-diagram.md) and the [Fibonacci Trace Validation](https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ1J5PcS2op_vrGtbK5Mif0gAN6wbAaTSWTHy2vuFtfbtqbI_dRqpalNamNjjUcyqD7hDPJRgI2cG-/pubhtml#) example. 
 
 ## References
 

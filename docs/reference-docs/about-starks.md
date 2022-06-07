@@ -17,7 +17,6 @@ To get started in making sense of the RISC Zero STARK, start with the [RISC Zero
   
 ### More Technical 
 
-We recommend the following external references on STARKs:
 - [Anatomy of a Stark](https://aszepieniec.github.io/stark-anatomy/) (developer focused)
 - [The Starkmath series](https://medium.com/tag/stark-math)
 - [STARK 101](https://starkware.co/stark-101/) (developer focused)

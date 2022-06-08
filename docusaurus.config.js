@@ -108,7 +108,7 @@ const config = {
             label: 'Terminology',
           },
           {
-            to: '/careers',
+            href: 'https://risczero.rippling-ats.com',
             position: 'left',
             label: 'Careers',
           },

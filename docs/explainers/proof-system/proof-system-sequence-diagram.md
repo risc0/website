@@ -8,24 +8,29 @@
 
 ```mermaid
 sequenceDiagram
+    Note over Prover,Verifier: Phase 1: Commiting the  Execution Trace
     Note over Prover: Prover runs iNTTs to construct <br/>a Trace Polynomial for each Trace Column, then runs NTTs <br/>to evaluate each Trace Polynomial over an Evaluation Domain,<br/>and commits those evaluations to Merkle Trees.
     Prover->>Verifier: Prover sends Merkle Roots <br/>for Trace Data Polynomials <br/>and Trace Control Polynomials
     Verifier->>Prover: Verifier returns PLONK <br/>mixing parameters
     Prover->>Verifier: Prover sends Merkle Roots for <br/>PLONK Polynomials 
+    Note over Prover,Verifier: Phase 2: Validating the Trace
     Verifier->>Prover: Verifier returns constraint mixing parameter, alpha
-    Note over Prover: Prover uses alpha to mix Constraint Polynomials <br/>into a single Constraint Polynomial, <br/>then divides by the public Zeroes Polynomial Z(x) <br/>to construct a High Degree Validity Polynomial, V(x),<br/> and then splits V(x) into a few Low Degree Validity Polynomials, v_j(x), <br/>and finally commits v_j(x) evaluations to Merkle Trees.
-    Prover->>Verifier: Prover sends Merkle Roots <br/>for Low Degree Validity Polynomials
-    Verifier->>Prover: Verifier chooses test point, z.
-    Prover->>Verifier: Prover commits evaluations of P_i and v_j, <br/>as well as the coefficients of the DEEP polynomials
-    Verifier->>Prover: Verifier returns a DEEP mixing parameter, beta
-    Note over Prover: Prover uses beta to mix the DEEP polynomials <br/>to form the FRI polynomial. 
+    Note over Prover: Prover uses alpha to mix Constraint Polynomials <br/>into a Mixed Constraint Polynomial, <br/>then divides by the public Zeroes Polynomial <br/>to construct the High Degree Validity Polynomial,<br/> splits it into a few Low Degree Validity Polynomials, and finally <br/>commits evaluations of the Low Degree Validity Polynomial a to Merkle Tree.
+    Prover->>Verifier: Prover sends Merkle Root <br/>for Low Degree Validity Polynomials
+    Note over Prover,Verifier: Phase 3: The DEEP Technique
+    Verifier->>Prover: Verifier chooses a DEEP test point
+    Note over Prover: To support DEEP test, Prover computes "necessary evaluations" <br/> of Trace Polynomials and Low Degree Validity Polynomials. 
+    Note over Prover: Prover also computes the coefficients of the DEEP polynomials
+    Prover->>Verifier: Prover sends "necessary evaluations" <br/>and coefficients of DEEP polynomials
+    Verifier->>Prover: Verifier returns a DEEP mixing parameter
+    Note over Prover: Prover uses DEEP Mixing Parameter to mix <br/> the DEEP polynomials, forming the FRI polynomial. 
     Prover->>Verifier: Prover sends Merkle Root <br/> for the FRI polynomial
-    Note over Prover,Verifier: We omit the details of the FRI Protocol for brevity.
+    Note over Prover,Verifier: Phase 4: The FRI Protocol. <br/>We omit the details of the FRI Protocol for brevity.
   
 ```
 ## The RISC Zero Proof System: A Step-By-Step Description
 
-### The Structure of the Execution Trace
+### Phase 1: Committing the Execution Trace
 - The Prover runs a computation in order to generate an `Execution Trace`. 
   - The `trace` is organized into `columns,` and the columns are categorized as `control columns`, `data columns`, and `PLONK columns`.
     - The `control columns` handle system initialization and shutdown, the initial program code to load into memory before execution, and other control signals that don't depend on the program execution.
@@ -41,7 +46,7 @@ sequenceDiagram
   - Then, the Prover uses the `PLONK mixing parameters` to generate the `PLONK columns`, interpolates them to form the `PLONK polynomials,` evaluates those polynomials over a larger domain, and commits those evaluations to a Merkle tree (see the [PLONK paper](https://eprint.iacr.org/2019/953.pdf) for details). 
   - The Prover sends the Merkle root of each tree to the Verifier.
   - Using these three Merkle roots as an entropy-source, we use Fiat-Shamir to choose a `constraint mixing parameter` $\alpha$, using a SHA-2 CRNG.
-### Validity Polynomials: The Core of the STARK Proof
+### Phase 2: Validating the Trace: the Core of the STARK Proof
 - The Prover uses the `constraint mixing parameter`, the `Trace Polynomials`, and the `Rule Checking Polynomials` to construct a few `Low Degree Validity Polynomials.` The details are as follows:
   - By writing $k$ publicly known `Rule Checking Polynomials`,  $R_0, R_1, ..., R_{k-1}$, in terms of the private `Trace Polynomials`, the Prover generates $k$ `Constraint Polynomials`, $C_j(x)$. 
     - The key point about these polynomials is that for each of the $k$ rules and each input $z$ that's associated with the trace, $C_j(z)$ will return 0 if the trace "passes the test," so to speak. 
@@ -54,7 +59,7 @@ sequenceDiagram
   - The Prover evaluates the `Low Degree Validity Polynomials`, encodes them in a Merkle Tree, and sends the Merkle root to the Verifier. 
   
   - We use Fiat-Shamir to choose the `DEEP Test Point`, $z$. 
-### The DEEP Technique
+### Phase 3: The DEEP Technique
 - The Verifier would like to check the asserted relation between $C$, $Z$, and $V$ at the `DEEP Test Point,` $z$. Namely, the Verifier would like to confirm that $V(z)Z(z)=C(z)$.
   - The Prover sends the evaluations of each $v_i$ at $z$, which allows the Verifier to compute $V(z)$. 
   - Computing $C(z)$ is slightly more complicated. Because `rule checks` can check relationships across multiple `columns` and multiple `clock cycles`,  evaluating $C(z)$ requires numerous evaluations of the form $P_i(\omega^nz)$ for varying `columns` $i$ and `cycles` $n$. The Prover sends these `necessary evaluations` of each $P_i$ to allow the Verifier to evaluate $C(z)$. We refer to the `necessary evaluations` $P_i(\omega^nz)$ as the `taps` of $P_i$ at $z$. 
@@ -63,5 +68,7 @@ sequenceDiagram
 - The Prover constructs the DEEP polynomials using the `taps`:
   - Denoting the `taps` of $P_i$ at $z$ as $(x_1,P_i(x_1)),\ldots,(x_n,P_i(x_n))$, the Prover constructs the DEEP polynomial $P'_i(x)=\frac{P_i(x)-\overline{P_i}(x)}{(x-x_1)\ldots(x-x_n)}$ where $\overline{P_i}(x)$ is the polynomial formed by interpolating the taps of $P_i$. The Prover computes $P'_i$, runs an iNTT on the result, and sends the coefficients of $P'_i$ to the Verifier. Using this technique, the Prover constructs and sends a DEEP polynomial for each $P_i$ and each $v_i$. 
 - At this point, the claim of trace validity has been reduced to the claim that each of the DEEP polynomials is actually a low-degree polynomial. To conclude the proof, the Prover mixes the DEEP polynomials into the `FRI Polynomial` using a `DEEP mixing parameter` and use the FRI protocol to show that the `FRI Polynomial` is a low-degree polynomial. 
+### Phase 4: The FRI Protocol
+- We omit the details of the FRI Protocol for brevity. 
 
 Thanks for reading! If you have questions or feedback, we'd love to hear from you on Discord or Twitter.

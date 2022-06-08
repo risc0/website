@@ -9,6 +9,7 @@ STARKs are a highly technical process - an innovation in the world of zero-knowl
 To get started in making sense of the RISC Zero STARK, start with the [RISC Zero Proof System Sequence Diagram + IOP Description](../explainers/proof-system/proof-system-sequence-diagram.md) and the [Fibonacci Trace Validation](https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ1J5PcS2op_vrGtbK5Mif0gAN6wbAaTSWTHy2vuFtfbtqbI_dRqpalNamNjjUcyqD7hDPJRgI2cG-/pubhtml#) example. 
 
 ## References
+We recommend the following external references on STARKs:
 
 ### Less Technical 
 - [Extreme Integrity in Decentralized World](https://medium.com/@eli_1210/extreme-integrity-in-decentralized-world-a56da4c730ea)
@@ -16,8 +17,6 @@ To get started in making sense of the RISC Zero STARK, start with the [RISC Zero
 - [STARKs vs. SNARKS (Consensys, 2021)](https://consensys.net/blog/blockchain-explained/zero-knowledge-proofs-starks-vs-snarks/)
   
 ### More Technical 
-
-We recommend the following external references on STARKs:
 - [Anatomy of a Stark](https://aszepieniec.github.io/stark-anatomy/) (developer focused)
 - [The Starkmath series](https://medium.com/tag/stark-math)
 - [STARK 101](https://starkware.co/stark-101/) (developer focused)

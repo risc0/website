@@ -39,4 +39,4 @@ Roots of unity come up constantly in a wide variety of applications: you'll most
 
 ## Additional References:
 - [Visual Intro to Galois Theory](https://www.youtube.com/watch?v=Ct2fyigNgPY)
-- [Splitting $x^{n-1}$ over a finite field](https://math.stackexchange.com/questions/2511486/)
+- [Splitting $x^{n}-1$ over a finite field](https://math.stackexchange.com/questions/2511486/)

@@ -2,6 +2,9 @@
 title: Careers
 ---
 <head>
+<meta name="description" content="View job descriptions, salary ranges, and further information about career opportunities at RISC Zero."/>
+<meta property="og:description" content="View job descriptions, salary ranges, and further information about career opportunities at RISC Zero."/>
+
 <link rel="stylesheet" type="text/css" media="all" href="https://assets.rippling-ats.com/stylesheets/embed.css" />
 <script type="text/javascript">
 		var ht_settings = ( ht_settings || new Object() );

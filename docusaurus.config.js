@@ -28,7 +28,7 @@ const config = {
           rehypePlugins: [katex],
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/risc0/website/tree/main/',
+          editUrl: 'https://github.com/risc0/website/edit/main/',
         },
         blog: {
           showReadingTime: true,

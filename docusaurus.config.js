@@ -78,7 +78,7 @@ const config = {
               to: 'docs/explainers/zkvm/what_is_risc_zero'
               },
               {label: 'About the Proof System',
-              to: 'docs/explainers/proof-system/proof-system-sequence-diagram'
+              to: 'docs/explainers/proof-system/what_is_a_receipt'
               }
             ]
           },
@@ -108,7 +108,7 @@ const config = {
             label: 'Terminology',
           },
           {
-            href: 'https://risczero.rippling-ats.com',
+            to: '/careers',
             position: 'left',
             label: 'Careers',
           },

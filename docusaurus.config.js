@@ -28,12 +28,12 @@ const config = {
           rehypePlugins: [katex],
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/risc0/website2/edit/main/docs/',
+          editUrl: 'https://github.com/risc0/website/tree/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/risc0/website2/edit/main/blog/',
+          editUrl: 'https://github.com/risc0/website/edit/main/blog/',
         },
         pages : {},
         theme: {

@@ -33,7 +33,7 @@ const config = {
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/risc0/website/edit/main/blog/',
+          editUrl: 'https://github.com/risc0/website/edit/main/',
         },
         pages : {},
         theme: {

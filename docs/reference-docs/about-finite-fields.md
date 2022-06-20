@@ -27,6 +27,7 @@ Given three ordered pairs modulo 5, we can interpolate a degree 2 polynomial tha
 FFTs still work over finite fields, although they're called NTTs. 
 
 >If the ideas above this text make sense, you should have enough finite field background to make sense of the applications in RISC Zero.
+>
 ## Finite Fields 301 - Roots of Unity
 
 $z$ is called an **$n^{th}$ Root of Unity** if $z^n=1$. 

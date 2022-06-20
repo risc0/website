@@ -16,7 +16,7 @@ If $p$ is prime, the integers modulo $p$ are a field. Moreover, I can find some 
 
 We say $3$ is a **multiplicative generator** for the integers modulo 5. For any prime modulus, a multiplicative generator exists.
 
-### Finite Fields 201: Polynomials over Finite Fields
+## Finite Fields 201: Polynomials over Finite Fields
 Most of your Algebra II knowledge about polynomials still holds in finite fields. 
 
 `Example: Consider` $f(x)=x^2-1\text{ mod }5$`.  Observe that ` $f(1)=f(4)=0.$ `We say ` $f$ `has roots at 1 and 4, and we can factor in the familiar way:` $f(x)=(x-1)(x-4)$`.`

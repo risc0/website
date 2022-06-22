@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # The RISC Zero Proof System
 
-*RISC Zero offers a [computational receipt](what_is_a_receipt.md) for any code that runs within the [RISC Zero zkVM](../zkvm/what_is_risc_zero.md), which serves to verifiably link the code that ran to the asserted output. RISC Zero's receipts are built on the shoulders of several recent advances in the world of Zero-Knowledge Cryptography: [zk-STARKs](https://eprint.iacr.org/2018/046.pdf), [PLONK](https://eprint.iacr.org/2019/953.pdf), and [DEEP-ALI](https://arxiv.org/pdf/1903.12243.pdf).*
+*RISC Zero offers a [computational receipt](what_is_a_receipt.md) for any code that runs within the [RISC Zero zkVM](../zkvm/zkvm_overview.md), which serves to verifiably link the code that ran to the asserted output. RISC Zero's receipts are built on the shoulders of several recent advances in the world of Zero-Knowledge Cryptography: [zk-STARKs](https://eprint.iacr.org/2018/046.pdf), [PLONK](https://eprint.iacr.org/2019/953.pdf), and [DEEP-ALI](https://arxiv.org/pdf/1903.12243.pdf).*
 
 *In this document, we present a succinct introduction to the RISC Zero Proof system, including a sequence diagram and a step-by-step description of the RISC Zero Non-Interactive Argument of Knowledge. We encourage readers to follow along with the [Fibonacci Trace Example](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) for a more concrete description of the protocol.*
 

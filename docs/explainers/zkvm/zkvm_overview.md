@@ -6,7 +6,7 @@ sidebar_position: 2
 
 *To invite collaboration and open source development, this is an early-release of documentation-in-progress. If you have questions/feedback or if you find errors, please let us know on Twitter or Discord.*
 
-A zero-knowledge virtual machine (zkVM) is a virtual machine that runs trusted code and generates proofs.  RISC Zero's [zkVM](what_is_risc_zero.md) implementation, based on the RISC-V architecture, executes code and produces a [computational receipt](../proof-system/what_is_a_receipt.md).
+A zero-knowledge virtual machine (zkVM) is a virtual machine that runs trusted code and generates proofs that authenticate the zkVM output.  RISC Zero's [zkVM](what_is_risc_zero.md) implementation, based on the RISC-V architecture, executes code and produces a [computational receipt](../proof-system/what_is_a_receipt.md).
 
 This document describes, at a high level, the components involved in this process. After reading this, you should understand the general process of receipt creation and be familiar with the language we use to describe the zkVM's operations. To understand how these operations generate an argument of computational integrity, see our introduction to the [proof system](../proof-system/proof-system-sequence-diagram.md).
 
@@ -31,7 +31,7 @@ E
 F
 end
 subgraph x[The receipt tells us:]
-D---G(What binary executed in the ZKVM)
+D---G(What binary executed in the zkVM)
 E---H(Whether the execution<br>followed expected behavior<br><br>Whether the journal or method ID<br>have changed)
 F---I(The values of all contents<br>written to the public journal)
 end
@@ -43,6 +43,6 @@ style I fill:none,stroke:none
 
 Before being executed on the zkVM, guest source code is converted into a RISC-V ELF binary. A hash of the binary file is used to create a `method ID` that uniquely identifies the binary being executed. The method ID is added to the `computational receipt`. The binary may include code instructions to publicly commit a value to the `journal`. Later, the journal contents can be read by anyone with the receipt.
 
-After the binary is executed, an [execution trace](../proof-system/what_is_a_trace.md) contains the expected and actual operations that took place in ZKVM memory. The trace is inspected and the binary file's expected operations are compared to the operations that were actually performed. A valid trace means that the memory operations were what we would expect to be performed, given our binary file and according to the RISC-V instruction set.
+After the binary is executed, an [execution trace](../proof-system/what_is_a_trace.md) contains the expected and actual operations that took place on the zkVM. The trace is inspected and the binary file's expected operations are compared to the operations that were actually performed. A valid trace means that the ELF file was faithfully executed according to the rules of the RISC-V instruction set architecture.
 
 The trace, the journal, and the method ID are then used to generate a seal, a blob of cryptographic data that shows the receipt is valid. The seal has properties that reveal whether itself, the method ID, or the journal have been altered. When the receipt is verified, the seal will be checked to confirm the validity of the receipt.

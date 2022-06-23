@@ -74,13 +74,12 @@ const config = {
               {label: 'Meet the Team',
               to: '/team'
               },
-              {label: 'About the zkVM',
-              to: 'docs/explainers/zkvm/what_is_risc_zero'
-              },
-              {label: 'About the Proof System',
-              to: 'docs/explainers/proof-system/what_is_a_receipt'
-              }
             ]
+          },
+          {
+            position: 'left',
+            label: 'Tech',
+            to: 'docs/technology',
           },
           {
             type: 'dropdown',

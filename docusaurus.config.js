@@ -77,11 +77,6 @@ const config = {
             ]
           },
           {
-            position: 'left',
-            label: 'Tech',
-            to: 'docs/technology',
-          },
-          {
             type: 'dropdown',
             position: 'left',
             label: 'Get Started',
@@ -99,6 +94,11 @@ const config = {
               to: 'http://www.github.com/risc0/risc0'
               }
             ]
+          },
+          {
+            position: 'left',
+            label: 'Tech',
+            to: 'docs/technology',
           },
           {
             type: 'doc',

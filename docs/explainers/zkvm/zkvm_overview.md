@@ -43,6 +43,6 @@ style I fill:none,stroke:none
 
 Before being executed on the zkVM, guest source code is converted into a RISC-V ELF binary. A hash of the binary file is used to create a `method ID` that uniquely identifies the binary being executed. The method ID is added to the `computational receipt`. The binary may include code instructions to publicly commit a value to the `journal`. Later, the journal contents can be read by anyone with the receipt.
 
-After the binary is executed, an [execution trace](../proof-system/what_is_a_trace.md) contains the expected and actual operations that took place on the zkVM. The trace is inspected and the binary file's expected operations are compared to the operations that were actually performed. A valid trace means that the ELF file was faithfully executed according to the rules of the RISC-V instruction set architecture.
+After the binary is executed, an [execution trace](../proof-system/what_is_a_trace.md) contains a complete record of zkVM operation. The trace is inspected and the ELF file's instructions are compared to the operations that were actually performed. A valid trace means that the ELF file was faithfully executed according to the rules of the RISC-V instruction set architecture.
 
 The trace, the journal, and the method ID are then used to generate a seal, a blob of cryptographic data that shows the receipt is valid. The seal has properties that reveal whether itself, the method ID, or the journal have been altered. When the receipt is verified, the seal will be checked to confirm the validity of the receipt.

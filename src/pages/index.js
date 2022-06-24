@@ -5,6 +5,20 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import Script from "react-inline-script"
+
+export default class PageLayout extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div id="some-content">
+        <Script src="https://boards.greenhouse.io/embed/job_board/js?for=risczero"></Script>
+      </div>)
+    }
+}
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();

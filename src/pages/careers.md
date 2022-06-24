@@ -9,5 +9,4 @@ title: Careers
 </head>
 
 # Careers
-
 <div id="grnhse_app"></div>

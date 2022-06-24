@@ -34,6 +34,6 @@ export default function Home() {
         <HomepageFeatures />
       </main>
     </Layout>
-    <script async="" src="https://boards.greenhouse.io/embed/job_board/js?for=risczero"></script>
+    <script src="https://boards.greenhouse.io/embed/job_board/js?for=risczero"></script>
   );
 }

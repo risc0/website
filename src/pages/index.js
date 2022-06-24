@@ -33,7 +33,7 @@ export default function Home() {
       <main>
         <HomepageFeatures />
       </main>
+      <script src="https://boards.greenhouse.io/embed/job_board/js?for=risczero"></script>
     </Layout>
-    <script src="https://boards.greenhouse.io/embed/job_board/js?for=risczero"></script>
   );
 }

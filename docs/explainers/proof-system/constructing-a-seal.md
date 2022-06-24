@@ -48,7 +48,7 @@ Let's remove the `rule-checking columns` for a minute and turn our attention tow
 
 *From here on, the lessons assume some familiarity with finite fields. If finite fields are foreign to you, fear not! This [finite fields primer](../../reference-docs/about-finite-fields.md) covers just enough to make sense of RISC Zero's use of finite fields.* 
 
-Every element of $\mathbb{F}_{97}$ can be written as a power of 5. In other words, the elements of $\mathbb{F}_{97}$ are $0, 5^0, 5^1, \ldots,$ and $5^{95}$. We write $\mathcal{D}(5^{12})$ for the set of powers of $5^{12}$ and $\mathcal{D}(5^{3})$ for the set of powers of $5^{3}$. Each of these sets is "evenly spaced" throughout $\mathbb{F}_{97}$, which facilitates the use of [number theoretic transforms](../../reference-docs/about-ntts-and-fourier.md). 
+Every element of $\mathbb{F}_{97}$ can be written as a power of 5. In other words, the elements of $\mathbb{F}_{97}$ are $0, 5^0, 5^1, \ldots,$ and $5^{95}$. We write $\mathcal{D}(5^{12})$ for the set of powers of $5^{12}$ and $\mathcal{D}(5^{3})$ for the set of powers of $5^{3}$. Each of these sets is "evenly spaced" throughout $\mathbb{F}_{97}$, which facilitates the use of number theoretic transforms.
 
 >Put succinctly, running an iNTT on a `trace column` gives the coefficients of a `trace polynomial`. 
 

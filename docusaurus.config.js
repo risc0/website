@@ -17,7 +17,12 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'risc0', // Usually your GitHub org/user name.
   projectName: 'website2', // Usually your repo name.
-  scripts: ['hhttps://boards.greenhouse.io/embed/job_board/js?for=risczero'],
+  scripts: [
+    {
+      src: 'hhttps://boards.greenhouse.io/embed/job_board/js?for=risczero',
+      async: true,
+    },
+  ],
   presets: [
     [
       'classic',

@@ -8,4 +8,3 @@ title: Careers
 
 # Careers
 <div id="grnhse_app"></div>
-<script async src="https://boards.greenhouse.io/embed/job_board/js?for=risczero"></script>

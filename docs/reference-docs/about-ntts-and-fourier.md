@@ -1,0 +1,6 @@
+
+# About Fourier transforms, FFTs, and NTTs
+
+Fourier transforms, FFTs, and NTTs are methods of transforming a function from **evaluation form** to **coefficient form**. This [DFT video](https://www.youtube.com/watch?v=nl9TZanwbBk) and [FFT video](https://www.youtube.com/watch?v=E8HeD-MUrjY) from UW professor Steve Brunton are brief and instructive. For visual intuition, we recommend Grant Sanderson's [3blue1brown video](https://www.youtube.com/watch?v=spUNpyF58BY) and [lecture](https://www.youtube.com/watch?v=g8RkArhtCc4). For a deeper look into the algorithm at both a software and hardware level, we recommend this [FFT video from Reducible](https://www.youtube.com/watch?v=h7apO7q16V0). And here's [Vitalik's take](https://vitalik.ca/general/2019/05/12/fft.html) on FFTs/NTTs. 
+
+In our context, where we're working with polynomials over finite fields, we use **number theoretic transforms** to convert between a polynomial's **evaluation form** and its **coefficient form**; these are equivalent to FFTs, aside from the notation for the roots of unity. NTTs (and iNTTs) form the bulk of the computational expense of the Risc0 protocol; we use them in the process of polynomial encoding and in implementing the FRI protocol.  

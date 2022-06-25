@@ -1,13 +1,11 @@
 
 # About Number Theoretic Transforms
-
 Number theoretic transforms (`NTTs`) and inverse number theoretic transforms (`iNTTs`) are a mechanism for converting between a `coefficient representation` and an `evaluation representation` of a given polynomial. 
 
 ## Documentation
 [Rust Crates for `NTTs` and `iNTTs`](https://docs.rs/risc0-zkp-core/0.10.0/risc0_zkp_core/ntt/index.html)
 
 ## Basic Function
-
 `NTTs` convert from `coefficient representation` to `evaluation representation`. 
 
 >`NTT(coefficients,field)=evaluations`
@@ -17,7 +15,6 @@ Number theoretic transforms (`NTTs`) and inverse number theoretic transforms (`i
 >`iNTT(evaluations,field)=coefficients`
 
 ## Background
-
 NTTs are a [finite field](about-finite-fields.md) analog to a Fourier transform. Fourier transforms, FFTs, DFTs and NTTs are various methods of transforming a function from **evaluation form** to **coefficient form**. 
 
 ### Coefficient Form 
@@ -28,7 +25,6 @@ When an array is written in evaluation form, there's an implicit choice $g\in\ma
 > The powers of $g$ are used as an `indexing set` to form ordered pairs $(g^i,u_i)$. 
 
 The polynomial associated with the array $(u_0,u_1,\ldots,u_{n-1})$ is the unique polynomial $f$ such that the degree of $f$ is less than $n$ and $f(g^i)=u_i$.
-
 
 ## Suggested Reading and Videos
 This [DFT video](https://www.youtube.com/watch?v=nl9TZanwbBk) and [FFT video](https://www.youtube.com/watch?v=E8HeD-MUrjY) from UW professor Steve Brunton are brief and instructive. For visual intuition, we recommend Grant Sanderson's [3blue1brown video](https://www.youtube.com/watch?v=spUNpyF58BY) and [lecture](https://www.youtube.com/watch?v=g8RkArhtCc4). To translate from FFTs to NTTs, replace the complex root of unity with a finite field root of unity. 

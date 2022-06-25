@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
-# The RISC Zero Proof System
+# ZKP Sequence Diagram and Spec
 
 *RISC Zero offers a [computational receipt](what_is_a_receipt.md) for any code that runs within the [RISC Zero zkVM](../zkvm/zkvm_overview.md), which serves to verifiably link the code that ran to the asserted output. RISC Zero's receipts are built on the shoulders of several recent advances in the world of Zero-Knowledge Cryptography: [zk-STARKs](https://eprint.iacr.org/2018/046.pdf), [PLONK](https://eprint.iacr.org/2019/953.pdf), and [DEEP-ALI](https://arxiv.org/pdf/1903.12243.pdf).*
 
-*In this document, we present a succinct introduction to the RISC Zero Proof system, including a sequence diagram and a step-by-step description of the RISC Zero Non-Interactive Argument of Knowledge. We encourage readers to follow along with the [Fibonacci Trace Example](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) for a more concrete description of the protocol.*
+*In this document, we present a succinct introduction to the RISC Zero Proof system, including a sequence diagram and a step-by-step description of the RISC Zero Non-Interactive Argument of Knowledge. We encourage readers to follow along with [Constructing a Seal](constructing-a-seal.md) for a more concrete description of the protocol.*
 
 *To invite collaboration and open source development, this is an early-release of documentation-in-progress. The implementation in code can be seen [here](https://github.com/risc0/risc0/blob/v0.7.2/risc0/zkp/prove/prove.cpp). If you have questions/feedback or if you find errors, please let us know on Twitter or Discord.*
 

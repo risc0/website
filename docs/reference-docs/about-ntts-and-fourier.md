@@ -1,6 +1,37 @@
 
-# About Fourier transforms, FFTs, and NTTs
+# About Number Theoretic Transforms
 
-Fourier transforms, FFTs, and NTTs are methods of transforming a function from **evaluation form** to **coefficient form**. This [DFT video](https://www.youtube.com/watch?v=nl9TZanwbBk) and [FFT video](https://www.youtube.com/watch?v=E8HeD-MUrjY) from UW professor Steve Brunton are brief and instructive. For visual intuition, we recommend Grant Sanderson's [3blue1brown video](https://www.youtube.com/watch?v=spUNpyF58BY) and [lecture](https://www.youtube.com/watch?v=g8RkArhtCc4). For a deeper look into the algorithm at both a software and hardware level, we recommend this [FFT video from Reducible](https://www.youtube.com/watch?v=h7apO7q16V0). And here's [Vitalik's take](https://vitalik.ca/general/2019/05/12/fft.html) on FFTs/NTTs. 
+Number theoretic transforms (`NTTs`) and inverse number theoretic transforms (`iNTTs`) are a mechanism for converting between a `coefficient representation` and an `evaluation representation` of a given polynomial. 
 
-In our context, where we're working with polynomials over finite fields, we use **number theoretic transforms** to convert between a polynomial's **evaluation form** and its **coefficient form**; these are equivalent to FFTs, aside from the notation for the roots of unity. NTTs (and iNTTs) form the bulk of the computational expense of the Risc0 protocol; we use them in the process of polynomial encoding and in implementing the FRI protocol.  
+## Documentation
+[Rust Crates for `NTTs` and `iNTTs`](https://docs.rs/risc0-zkp-core/0.10.0/risc0_zkp_core/ntt/index.html)
+
+## Basic Function
+
+`NTTs` convert from `coefficient representation` to `evaluation representation`. 
+
+>`NTT(coefficients,field)=evaluations`
+
+`iNTTs` convert from `evaluation representation` to `coefficient representation`
+
+>`iNTT(evaluations,field)=coefficients`
+
+## Background
+
+NTTs are a [finite field](about-finite-fields.md) analog to a Fourier transform. Fourier transforms, FFTs, DFTs and NTTs are various methods of transforming a function from **evaluation form** to **coefficient form**. 
+
+### Coefficient Form 
+An array $(a_0,a_1,\ldots,a_{n-1})$ defines a degree $n-1$ polynomial, $f$, where $f(x)=a_0x^0+a_1x^1+\ldots,a_{n-1}x^{n-1}$
+
+### Evaluation Form
+When an array is written in evaluation form, there's an implicit choice $g\in\mathbb{F}_q$. 
+> The powers of $g$ are used as an `indexing set` to form ordered pairs $(g^i,u_i)$. 
+
+The polynomial associated with the array $(u_0,u_1,\ldots,u_{n-1})$ is the unique polynomial $f$ such that the degree of $f$ is less than $n$ and $f(g^i)=u_i$.
+
+
+## Suggested Reading and Videos
+This [DFT video](https://www.youtube.com/watch?v=nl9TZanwbBk) and [FFT video](https://www.youtube.com/watch?v=E8HeD-MUrjY) from UW professor Steve Brunton are brief and instructive. For visual intuition, we recommend Grant Sanderson's [3blue1brown video](https://www.youtube.com/watch?v=spUNpyF58BY) and [lecture](https://www.youtube.com/watch?v=g8RkArhtCc4). To translate from FFTs to NTTs, replace the complex root of unity with a finite field root of unity. 
+
+For a deeper look into the algorithm at both a software and hardware level, we recommend this [FFT video from Reducible](https://www.youtube.com/watch?v=h7apO7q16V0). And here's [Vitalik's take](https://vitalik.ca/general/2019/05/12/fft.html) on FFTs/NTTs. 
+

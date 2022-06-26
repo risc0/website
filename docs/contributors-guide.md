@@ -22,7 +22,7 @@ In order to achieve this objective, we rely on:
 >- `Keep it Simple`: We write short sentences with minimal superflous language. We keep content digestible by splitting long docs into smaller chunks.
 >- `Progressive Disclosure`: Our landing pages are simple and clear. Both at the level of site-organization and individual doc-organization, we present a bird's eye view first with opt-in paths toward higher levels of detail and technicality. 
 >- `Lots of Pointers`: We keep materials succinct through extensive use of pointers on modular, single-purpose components. 
->- `Consistent and Accessible Terminology`: We are diligent about using our official terminology as defined, and we are diligent about using precise terminology as much as possible. At the same time, we minimize our use of technical jargon, taking care to provide reference pages to pre-requisite knowledge as appropriate. 
+>- `Consistent and Accessible Terminology`: We are diligent about using our official terminology as defined and using precise language as much as possible. At the same time, we minimize our use of technical jargon, taking care to provide reference pages to pre-requisite knowledge as appropriate. 
 
 ## Terminology Choices
 At this stage, our terminology choices are subject to ongoing evaluation, and we encourage conversation and questions about nomenclature/terminology. Please let us know when you encounter terms that don't seem quite right. 

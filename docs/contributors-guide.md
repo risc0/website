@@ -14,18 +14,18 @@
 - If you want to clone the repo and work locally, you may want to check out the [Docusaurus documentation](https://docusaurus.io/docs/installation). We like to use `yarn start` to run a local build, especially when we're working with changes that involve links or sidebars. 
 
 ## Style Guidelines
-Our objective in organizing website content is that anyone who finds their way to any RISC Zero content is able to rapidly find their way to the material suits their needs. 
+Our objective in organizing and creating website content is that anyone who finds their way to any RISC Zero content is able to rapidly find their way to the material suits their needs. 
 
 In order to achieve this objective, we rely on:
 
->- Clear Headers: We head each document with a succinct statement of purpose and pointers to related content.
->- Single Purpose Docs: We avoid repeating ourselves and keep content digestible by splitting long docs into smaller chunks
->- Progressive Disclosure: We aim to start simple and clear, offering opt-in paths toward higher levels of technicality. 
->- Lots of Pointers: We keep materials succinct by linking to pre-requisite knowledge and splitting behemoth docs into modular components.
->- Consistent, Clear, and Accessible Terminology: We write precisely without providing unnecessary technical obstacles. 
+>- `Clear Purpose`: We aim for single-purpose docs, and we head each document with a succinct statement of purpose and pointers to related content. We use roadmaps, signposting, headings, and text formatting to guide the reader's attention toward the purpose of the doc. 
+>- `Keep it Simple`: We write short sentences with minimal superflous language. We keep content digestible by splitting long docs into smaller chunks.
+>- `Progressive Disclosure`: Our landing pages are simple and clear. Both at the level of site-organization and individual doc-organization, we present a bird's eye view first with opt-in paths toward higher levels of detail and technicality. 
+>- `Lots of Pointers`: We keep materials succinct through extensive use of pointers on modular components.
+>- `Consistent and Accessible Terminology`: We are diligent about using our official terminology as defined, and we are diligent about using precise terminology as much as possible. At the same time, we minimize our use of technical jargon, taking care to provide reference pages to pre-requisite knowledge as appropriate. 
 
-## Terminology
-We encourage conversation and questions about nomenclature/terminology. Please let us know when you encounter terms that don't seem quite right. 
+## Terminology Choices
+At this stage, our terminology choices are subject to ongoing evaluation, and we encourage conversation and questions about nomenclature/terminology. Please let us know when you encounter terms that don't seem quite right. 
 - Officially established terminology is [here](key-terminology.md). 
 - Ongoing terminology and naming discussions are [TODO where?]
 

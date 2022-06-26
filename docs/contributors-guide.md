@@ -24,10 +24,10 @@ In order to achieve this objective, we rely on:
 >- `Lots of Pointers`: We keep materials succinct through extensive use of pointers on modular, single-purpose components. 
 >- `Consistent and Accessible Terminology`: We are diligent about using our official terminology as defined and using precise language as much as possible. At the same time, we minimize our use of technical jargon, taking care to provide reference pages to pre-requisite knowledge as appropriate. 
 
-## Terminology Choices
-At this stage, our terminology choices are subject to ongoing evaluation, and we encourage conversation and questions about nomenclature/terminology. Please let us know when you encounter terms that don't seem quite right. 
-- Officially established terminology is [here](key-terminology.md). 
-- Ongoing terminology and naming discussions are [TODO where?]
+## Terminology Conventions
+[`RISC Zero Official Terminology`](key-terminology.md)
+
+Our terminology and naming conventions are subject to ongoing evaluation, and we encourage conversation and questions on these topics. Please let us know via a [`GitHub issue`](https://github.com/risc0/website/issues) when you encounter terms that don't seem quite right. 
 
 ## Navbar and Sidebars
 - The navbar is defined in `docusaurus.config.js`. Any changes require manual configuration.

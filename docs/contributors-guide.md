@@ -21,7 +21,7 @@ In order to achieve this objective, we rely on:
 >- `Clear Purpose`: We aim for single-purpose docs, and we head each document with a succinct statement of purpose and pointers to related content. We use roadmaps, signposting, headings, and text formatting to guide the reader's attention toward the purpose of the doc. 
 >- `Keep it Simple`: We write short sentences with minimal superflous language. We keep content digestible by splitting long docs into smaller chunks.
 >- `Progressive Disclosure`: Our landing pages are simple and clear. Both at the level of site-organization and individual doc-organization, we present a bird's eye view first with opt-in paths toward higher levels of detail and technicality. 
->- `Lots of Pointers`: We keep materials succinct through extensive use of pointers on modular components.
+>- `Lots of Pointers`: We keep materials succinct through extensive use of pointers on modular, single-purpose components. 
 >- `Consistent and Accessible Terminology`: We are diligent about using our official terminology as defined, and we are diligent about using precise terminology as much as possible. At the same time, we minimize our use of technical jargon, taking care to provide reference pages to pre-requisite knowledge as appropriate. 
 
 ## Terminology Choices
@@ -31,9 +31,9 @@ At this stage, our terminology choices are subject to ongoing evaluation, and we
 
 ## Navbar and Sidebars
 - The navbar is defined in `docusaurus.config.js`. Any changes require manual configuration.
-  - [Navbar documentation](https://docusaurus.io/docs/api/themes/configuration)
+  - [How to edit the navbar](https://docusaurus.io/docs/api/themes/configuration)
 - The sidebars are defined in `sidebars.js`. Any changes outside of `docs/reference-docs`, `docs/explainers/zkp`, or `docs/explainers/zkvm` require manual configuration.
-  - [Sidebar documentation](https://docusaurus.io/docs/sidebar)
+  - [How to edit the sidebar](https://docusaurus.io/docs/sidebar)
 
 ## Categories of Documentation
 We organize our docs into 4 categories, as per [the Divio documentation guidelines](https://documentation.divio.com). 

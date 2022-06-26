@@ -3,7 +3,7 @@
 Number theoretic transforms (`NTTs`) and inverse number theoretic transforms (`iNTTs`) are a mechanism for converting between a `coefficient representation` and an `evaluation representation` of a given polynomial. 
 
 ## Documentation
-[Rust Crates for `NTTs` and `iNTTs`](https://docs.rs/risc0-zkp-core/0.10.0/risc0_zkp_core/ntt/index.html)
+Implementation and documentation for NTTs and iNTTs is in the `risc0-zkp-core` [Rust crate](https://github.com/risc0/risc0#rust-crates).
 
 ## Basic Function
 `NTTs` convert from `coefficient representation` to `evaluation representation`. 

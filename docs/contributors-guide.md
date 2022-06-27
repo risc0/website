@@ -5,7 +5,7 @@
 >- Make suggestions or report bugs via  [GitHub issues](https://github.com/risc0/website/issues)
 >- Contribute website content or give feedback on [open pull requests](https://github.com/risc0/website/pulls) 
 >- Contribute to the [main zkVM project](https://github.com/risc0/risc0)
->- Contribute to our tutorials and how-to guides at the [Rust starter repo](https://github.com/risc0/risc0-rust-starter/) and [Rust examples](https://github.com/risc0/risc0-rust-examples/)
+>- Contribute to our tutorials and how-to guides at the [Rust starter repo](https://github.com/risc0/risc0-rust-starter/) and [Rust examples repo](https://github.com/risc0/risc0-rust-examples/)
 >- Ask questions on  [Discord](https://discord.gg/risczero)
 
 ## How To Contribute

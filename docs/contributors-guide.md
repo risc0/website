@@ -11,7 +11,7 @@
 ## How To Contribute
 - All changes to this website are managed through GitHub pull requests, so you'll need a [GitHub Account](https://github.com/) to contribute. 
 - You can suggest an edit directly via the `Edit this Page` button at the bottom of each page. 
-- To create a new page, you can use the [GitHub browser interface](https://www.github.com/risc0/website); the content is in `pages` and `docs`. 
+- To create a new page, you can use the [GitHub browser interface](https://www.github.com/risc0/website); the content is in `src/pages` and `docs`. 
   - Please read about [the navbar and sidebars](./contributors-guide.md#navbar-and-sidebars) and [categories of documentation](./contributors-guide.md#categories-of-documentation) before creating a new page.
 - If you want to clone the repo and work locally, you may want to check out the [Docusaurus documentation](https://docusaurus.io/docs/installation). We like to use `yarn start` to run a local build, especially when we're working with changes that involve links or sidebars. 
 
@@ -34,8 +34,9 @@ Our terminology and naming conventions are subject to ongoing evaluation, and we
 ## Navbar and Sidebars
 - The navbar is defined in `docusaurus.config.js`. Any changes require manual configuration.
   - [How to edit the navbar](https://docusaurus.io/docs/api/themes/configuration)
-- The sidebars are defined in `sidebars.js`. Any changes outside of `docs/reference-docs`, `docs/explainers/zkp`, or `docs/explainers/zkvm` require manual configuration.
+- The sidebars are defined in `sidebars.js`. Any changes outside of `docs/reference-docs`, `docs/explainers/zkp`, or `docs/explainers/zkvm` require manual configuration. 
   - [How to edit the sidebar](https://docusaurus.io/docs/sidebar)
+  - The default configuration (and our current configuration) is that `pages` do not have sidebars and `docs` do.
 
 ## Categories of Documentation
 We organize our docs into 4 categories, as per [the Divio documentation guidelines](https://documentation.divio.com). 

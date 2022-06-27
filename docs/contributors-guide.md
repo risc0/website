@@ -2,11 +2,11 @@
 *This page describes guidelines for community contributions to this [website](https://www.github.com/risc0/website); you may also be interested in contributing to the [main project codebase](https://github.com/risc0/risc0) or to the [examples repo](https://github.com/risc0/risc0-rust-examples).* 
 
 >`RISC Zero welcomes community participation!`
->- Make suggestions or report bugs via  [`GitHub issues`](https://github.com/risc0/website/issues)
->- Contribute content or corrections to this website via  [`PRs`](https://github.com/risc0/website/pulls) 
->- Contribute to the zkVM project at [`risc0/risc0`](https://github.com/risc0/risc0)
->- Contribute to our tutorials and how-to guides at [`risc0/risc0-rust-starter`](https://github.com/risc0/risc0-rust-starter/)
->- Ask questions on  [`Discord`](https://discord.gg/risczero)
+>- Make suggestions or report bugs via  [GitHub issues](https://github.com/risc0/website/issues)
+>- Contribute website content or give feedback on [open pull requests](https://github.com/risc0/website/pulls) 
+>- Contribute to the [main zkVM project](https://github.com/risc0/risc0)
+>- Contribute to our tutorials and how-to guides at the [Rust starter repo](https://github.com/risc0/risc0-rust-starter/) and [Rust examples](https://github.com/risc0/risc0-rust-examples/)
+>- Ask questions on  [Discord](https://discord.gg/risczero)
 
 ## How To Contribute
 - All changes to this website are managed through GitHub pull requests, so you'll need a [GitHub Account](https://github.com/) to contribute. 

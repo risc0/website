@@ -2,12 +2,14 @@
 *This page describes guidelines for community contributions to this [website](https://www.github.com/risc0/website); you may also be interested in contributing to the [main project codebase](https://github.com/risc0/risc0) or to the [examples repo](https://github.com/risc0/risc0-rust-examples).* 
 
 >`RISC Zero welcomes community participation!`
->- Contribute content or corrections via  [`PRs`](https://github.com/risc0/website/pulls) 
 >- Make suggestions or report bugs via  [`GitHub issues`](https://github.com/risc0/website/issues)
+>- Contribute content or corrections to this website via  [`PRs`](https://github.com/risc0/website/pulls) 
+>- Contribute to the zkVM project at [`risc0/risc0`](https://github.com/risc0/risc0)
+>- Contribute to our tutorials and how-to guides at [`risc0/risc0-rust-starter`](https://github.com/risc0/risc0-rust-starter/)
 >- Ask questions on  [`Discord`](https://discord.gg/risczero)
 
 ## How To Contribute
-- You'll need a [GitHub Account](https://github.com/) to contribute. 
+- All changes to this website are managed through GitHub pull requests, so you'll need a [GitHub Account](https://github.com/) to contribute. 
 - You can suggest an edit directly via the `Edit this Page` button at the bottom of each page. 
 - To create a new page, you can use the [GitHub browser interface](https://www.github.com/risc0/website); the content is in `pages` and `docs`. 
   - Please read about [the navbar and sidebars](./contributors-guide.md#navbar-and-sidebars) and [categories of documentation](./contributors-guide.md#categories-of-documentation) before creating a new page.
@@ -38,7 +40,7 @@ Our terminology and naming conventions are subject to ongoing evaluation, and we
 ## Categories of Documentation
 We organize our docs into 4 categories, as per [the Divio documentation guidelines](https://documentation.divio.com). 
 - Reference docs and explainers live on this site under `docs/reference-docs` and `docs/explainers`. 
-- Tutorials & how-to guides live on Github [TODO where should we be linking to?] 
+- Tutorials & how-to guides live on Github in the [`risc0/rust-starter`](https://github.com/risc0/risc0-rust-starter) repo. 
 
 ### Reference Docs
 We typically organize reference docs according to the following sections; we use `About NTTs` as a template. 
@@ -53,7 +55,7 @@ We typically organize reference docs according to the following sections; we use
 >- Content 3
 >- Suggested Reading 
   
-*Changes to this organization can be proposed via a PR to this page or via [Github Issue link]*
+*Changes to this organization can be proposed for discussion via a [GitHub issue](https://github.com/risc0/website/issues) or proposed for action via a PR on this page.*
 
 ### Explainer Docs
 Our explainer docs are currently split into `zkVM Explainers` and `ZKP Explainers`. Explainers contain clearly articulated goals in the header, as well as pointers to related content. 

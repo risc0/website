@@ -17,7 +17,6 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'risc0', // Usually your GitHub org/user name.
   projectName: 'website2', // Usually your repo name.
-
   presets: [
     [
       'classic',
@@ -107,7 +106,7 @@ const config = {
             label: 'Terminology',
           },
           {
-            to: '/careers',
+            href: 'https://boards.greenhouse.io/risczero',
             position: 'left',
             label: 'Careers',
           },

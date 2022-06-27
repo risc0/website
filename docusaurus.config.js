@@ -17,7 +17,6 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'risc0', // Usually your GitHub org/user name.
   projectName: 'website2', // Usually your repo name.
-
   presets: [
     [
       'classic',
@@ -74,12 +73,6 @@ const config = {
               {label: 'Meet the Team',
               to: '/team'
               },
-              {label: 'About the zkVM',
-              to: 'docs/explainers/zkvm/what_is_risc_zero'
-              },
-              {label: 'About the Proof System',
-              to: 'docs/explainers/proof-system/what_is_a_receipt'
-              }
             ]
           },
           {
@@ -102,13 +95,18 @@ const config = {
             ]
           },
           {
+            position: 'left',
+            label: 'Tech',
+            to: 'docs/technology',
+          },
+          {
             type: 'doc',
             docId: 'key-terminology',
             position: 'left',
             label: 'Terminology',
           },
           {
-            to: '/careers',
+            href: 'https://boards.greenhouse.io/risczero',
             position: 'left',
             label: 'Careers',
           },

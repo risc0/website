@@ -159,7 +159,7 @@ const config = {
               },
               {
                 label: 'Website',
-                href: 'https://github.com/risc0/website',
+                to: 'docs/contributors-guide',
               },
             ],
           },

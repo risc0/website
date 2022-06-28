@@ -1,11 +1,11 @@
 # Contributor's Guide
-*This page describes guidelines for community contributions to this [website](https://www.github.com/risc0/website); you may also be interested in contributing to the [main project codebase](https://github.com/risc0/risc0) or to the [examples repo](https://github.com/risc0/risc0-rust-examples).* 
+*This page describes guidelines for community contributions to this [website](https://www.github.com/risc0/website); you may also be interested in contributing to the [main project codebase](https://github.com/risc0/risc0) or to the [examples repository](https://github.com/risc0/risc0-rust-examples).* 
 
 >`RISC Zero welcomes community participation!`
 >- Make suggestions or report bugs via  [GitHub issues](https://github.com/risc0/website/issues)
 >- Contribute website content or give feedback on [open pull requests](https://github.com/risc0/website/pulls) 
 >- Contribute to the [main zkVM project](https://github.com/risc0/risc0)
->- Contribute to our tutorials and how-to guides at the [Rust starter repo](https://github.com/risc0/risc0-rust-starter/) and [Rust examples repo](https://github.com/risc0/risc0-rust-examples/)
+>- Contribute to our tutorials and how-to guides at the [Rust starter repository](https://github.com/risc0/risc0-rust-starter/) and [Rust examples repository](https://github.com/risc0/risc0-rust-examples/)
 >- Ask questions on  [Discord](https://discord.gg/risczero)
 
 ## How To Contribute
@@ -13,7 +13,7 @@
 - You can suggest an edit directly via the `Edit this Page` button at the bottom of each page. 
 - To create a new page, you can use the [GitHub browser interface](https://www.github.com/risc0/website); the content is in `src/pages` and `docs`. 
   - Please read about [the navbar and sidebars](./contributors-guide.md#navbar-and-sidebars) and [categories of documentation](./contributors-guide.md#categories-of-documentation) before creating a new page.
-- If you want to clone the repo and work locally, you may want to check out the [Docusaurus documentation](https://docusaurus.io/docs/installation). We like to use `yarn start` to run a local build, especially when we're working with changes that involve links or sidebars. 
+- If you want to clone the repository and work locally, you may want to check out the [Docusaurus documentation](https://docusaurus.io/docs/installation). We like to use `yarn start` to run a local build, especially when we're working with changes that involve links or sidebars. 
 
 ## Style Guidelines
 Our objective in organizing and creating website content is that anyone who finds their way to any RISC Zero content is able to rapidly find their way to the material suits their needs. 
@@ -41,7 +41,7 @@ Our terminology and naming conventions are subject to ongoing evaluation, and we
 ## Categories of Documentation
 We organize our docs into 4 categories, as per [the Divio documentation guidelines](https://documentation.divio.com). 
 - Reference docs and explainers live on this site under `docs/reference-docs` and `docs/explainers`. 
-- Tutorials & how-to guides live on Github in the [`risc0/rust-starter`](https://github.com/risc0/risc0-rust-starter) repo. 
+- Tutorials & how-to guides live on Github in the [`risc0/rust-starter`](https://github.com/risc0/risc0-rust-starter) repository. 
 
 ### Reference Docs
 We typically organize reference docs according to the following sections; we use `About NTTs` as a template. 

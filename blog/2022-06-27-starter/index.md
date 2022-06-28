@@ -38,30 +38,7 @@ The method ID and a hash of the journal are included in the cryptographic seal s
 
 The diagram below shows these components in action:
 
-```mermaid
-flowchart LR
-A(multiply.rs)-->|compiles to an|B(ELF binary)
-B-->|Whose execution produces an| C(Execution trace)
-B-->|Whose hash forms a unique| D(Method ID)
-C-->|That, if valid,<br>generates a|E(Cryptographic seal)
-B-->|Whose operations can include<br>committing values to a|F(Journal)
-subgraph Together, these form a receipt.
-D
-E
-F
-end
-subgraph x[The receipt tells us:]
-D---G(What binary executed in the ZKVM)
-E---H(Whether the execution<br>followed expected behavior<br><br>Whether the journal or method ID<br>have changed)
-F---I(The values of all contents<br>written to the public journal)
-end
-style B fill:#3c6464
-style x fill:none, stroke:none
-style G fill:none,stroke:none
-style H fill:none,stroke:none
-style I fill:none,stroke:none
-```
-<!--Reviewer note: the 'About the zkVM' page is under review and the link below will be dead until it is approved-->
+![](fig1.png)
 
 For more details on this process, see our [zkVM Overview](https://www.risczero.com/docs/explainers/zkvm/zkvm_overview); for maximal detail, see our [proof system sequence diagram](https://www.risczero.com/docs/explainers/proof-system/proof-system-sequence-diagram). In the next section, we'll show how this process is managed from the perspective of the host program, the guest zkVM program, and the prover object that we call from the host. 
 
@@ -69,32 +46,7 @@ For more details on this process, see our [zkVM Overview](https://www.risczero.c
 
 The process diagram below shows the execution steps relevant to host and guest interactions. To illustrate the responsibility of the `prover`, we have included it as a separate entity. In practice, this object is instantiated on the host and lives in host memory.
 
-```mermaid
-sequenceDiagram
-participant B as Recipient<br>(recipient)
-participant H as Host<br>(main program)
-participant P as Prover<br>(main program object)
-participant G as Guest zkvm
-H->>H: create prover object
-H->>P: share numbers with prover
-P->>G: add number values to guest-readable memory
-H->>P: run prover
-rect rgb(100, 100, 100)
-note left of G: when the prover runs,<br>it manages these steps.
-P->>G: run our guest binary
-rect rgb(60, 100, 100)
-note left of G: the guest program<br>dictates these steps.
-G->>G: read prime values
-G->>G: calculate prime product
-G->>G: commit prime product<br>to public journal
-end
-G->>P: <br>execution trace is complete
-P->>H: verify trace,<br>return receipt
-end
-H->>B: give receipt to recipient
-B->>B: recipient verifies receipt
-B->>B: recipient reads prime product<br>from receipt journal
-```
+![](fig2.png)
 
 Some of the steps described above are handled by [RISC Zero project code](https://github.com/risc0/risc0) (such as the `prover.run()` function); other steps are performed explicitly by host or guest code. For example, the values shown in the blue box are dictated by guest zkVM code (`multiply.rs`). Others, like verifying the execution trace and producing a receipt, are a part of our prover object's internally defined behavior.
 
@@ -128,13 +80,7 @@ In our example, the receipt is verified from the `main.rs` host program. However
 
 We would also want to give the source code for the guest program to the recipient. The recipient would generate the `method ID` of the zkVM program binary on their side and use this to check the receipt's method ID. As a reminder, the process by which zkVM guest code is used to generate the method ID is repeated below.
 
-```mermaid
-flowchart LR
-P(zkVM guest code)--compiles to an-->B(ELF binary)
-B-->|whose hash forms a| C(Method ID)
-C-->|that we store in the| D(Receipt)
-style B fill:#3c6464
-```
+![](fig3.png)
 
 <!--Reviewers take note: these articles are on separate branches so the article link below is dead. When these are situated on the website blog, they'll link to each other as introductory posts #1 and #2.-->
 In an upcoming article, we'll show you how the computational receipt is created and checked in greater detail as we walk through how RISC Zero projects can allow us to trust user-provided data. We'll look at a slightly (but not much) more involved program that allows a user to check their own password against a set of validity requirements (e.g., the inclusion of uppercase letters) and provide their own password hash. If you have any questions or are interested in talking about zkVM projects, come find us on [Twitter](https://twitter.com/risczero) and [Discord](https://discord.com/invite/risczero). We'd love to see what you build using the RISC Zero zkVM!

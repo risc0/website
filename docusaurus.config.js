@@ -58,7 +58,6 @@ const config = {
       colorMode: {
         defaultMode: 'dark',
       },
-      navbar: {
         title: 'RISC Zero',
         logo: {
           alt: 'Risc0 Logo',
@@ -106,7 +105,8 @@ const config = {
             label: 'Terminology',
           },
           {
-            href: 'https://boards.greenhouse.io/risczero',
+            //href: 'https://boards.greenhouse.io/risczero',
+            to: '/careers'
             position: 'left',
             label: 'Careers',
           },

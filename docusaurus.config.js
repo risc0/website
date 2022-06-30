@@ -105,9 +105,9 @@ const config = {
             label: 'Terminology',
           },
           {
-            to: '/careers'
             position: 'left',
             label: 'Careers',
+            to: '/careers',
           },
           {
             href: 'https://github.com/Risc0',

@@ -15,7 +15,7 @@ By reading this post, you should learn, at a high level:
 
 # A program to multiply two numbers in the zkVM
 
-In the Rust starter program, we demonstrate how to multiply two numbers and share their product with a recipient without revealing what the two factors are. The RISC Zero zkVM provides a cryptographically strong argument that we performed the computation. By sharing the computational result from the zkVM, we can tie our computational results to our argument of correct program execution.
+In the Rust starter program, we demonstrate how to multiply two numbers and share their product without revealing what the two factors are. The RISC Zero zkVM provides a cryptographically strong argument that we performed the computation, which is witnessed by a verifiable "receipt." By sharing the receipt, we can convince a skeptical third party that we ran the computation faithfully and that the output is honest.
 
 # Differentiating host and guest code
 

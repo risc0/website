@@ -5,7 +5,7 @@ authors: [elakn]
 tags: [zk, zkvm, rust]
 ---
 
-In this post, we introduce a simple Rust code project written for the RISC Zero zero-knowledge virtual machine (zkVM). In this post, We won't show you how to write a full program, but reading this should help you get acquainted with writing code for the zkVM. Although code has been omitted for simplicity, we strongly recommend reading the following explanation in conjunction with the [RISC Zero Rust starter example](https://github.com/risc0/risc0-rust-starter) repository.
+In this post, we introduce a simple Rust code project written for the RISC Zero zero-knowledge virtual machine (zkVM). In this post, we won't show you how to write a full program, but reading this should help you get acquainted with writing code for the zkVM. Although code has been omitted for simplicity, we strongly recommend reading the following explanation in conjunction with the [RISC Zero Rust starter example](https://github.com/risc0/risc0-rust-starter) repository.
 
 By reading this post, you should learn, at a high level:
 * How RISC Zero can be used to convince someone that code has executed on the zkVM

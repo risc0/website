@@ -166,11 +166,6 @@ $c'_3(x) = \frac{c_3(x) - c_3(93)}{x - 93}$
 
 $V'(x)  = \frac{V(x) - V(93)}{x - 93}$ where the Prover computes V(93) by running `iNTT(ValidityColumn)` and then evaluating the resulting `validity polynomial` at $z=93$.
 
-
-![Lesson 10: The DEEP Technique](assets/fibonacci-09b.png)
-	
-Note that the output of the iNTT contains only $8$ non-zero entries.
-
 ## Lesson 10: Mixing for FRI
 
 After using the `DEEP polynomials` to check the relation between the Trace Polynomial, the `validity polynomial`, and the `zeros polynomial` at $z=93$, the only thing left for the Prover to do is to show that the `DEEP polynomials` are low-degree. 	
@@ -182,8 +177,17 @@ Letting $c'_1, c'_2, c'_3, d'_1, d'_2, d'_3$, and $V'$ denote the `DEEP polynomi
 				
 ![Lesson 11: Mixing for FRI](assets/fibonacci-10.png)
 
-To complete the argument, the Prover constructs a FRI proof that $f_0(x)$ is a low degree polynomial.													
-With this process, the Prover has constructed a zero-knowledge argument of computational integrity that can be verified incredibly quickly. 
+To complete the argument, the Prover constructs a FRI proof that $f_0(x)$ is a low degree polynomial. With this process, the Prover has constructed a zero-knowledge argument of computational integrity. We omit the details of FRI for brevity, but we can check our work by running an iNTT on the evaluations of $f_0$: 
+
+>`iNTT([53,69,63,30,46,13,60,50,38,3,95,23,75,39,62,19,62,58,41,67,89,41,50,24,95,90,72,20,82,33,0,16],prime=97)`
+
+returns
+
+>`[19, 56, 34, 48, 43, 37, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`
+
+Writing this array as the coefficients of a polynomial, we see that the values in the FRI polynomial column *do*, in fact, correspond to the following low-degree polynomial: 
+
+$f_0(x)=19+56x+34x^2+48x^3+43x^4+37x^5+10x^6$.
 
 Whew! Congratulations and thank you for making it this far!
 

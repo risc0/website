@@ -8,7 +8,7 @@ sidebar_position: 3
 
 The construction of a seal is highly technical, relying on several recent advances in the world of zero-knowledge cryptography. In this series of 10 brief lessons, we walk through the construction of a RISC Zero seal with as little technical jargon as possible. 
 
-You can peek behind the formulas on the [Google Sheet version](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) or [download a PDF](assets/fibonacci-stark.pdf). If you make sense of these 10 lessons, you'll have a solid handle on the mechanics of a zk-STARK (and we'd likely love to [hire you](../src/pages/careers.md)). 
+You can peek behind the formulas on the [Google Sheet version](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) or [download a PDF](assets/fibonacci-stark.pdf). If you make sense of these 10 lessons, you'll have a solid handle on the mechanics of a zk-STARK (and we'd likely love to [hire you](../../../src/pages/careers.md). 
 
 The [proof system sequence diagram](proof-system-sequence-diagram.md) describes this process in more generality; we suggest going back and forth between this document and the sequence diagram. 
 

@@ -1,15 +1,15 @@
 # About STARKs
 
-The **seal** on a RISC Zero receipt is generated using a zk-STARK: a *zero knowledge, scalable, transparent argument of knowledge.* 
+The seal on a RISC Zero receipt is generated using a **zk-STARK**: a *zero knowledge, scalable, transparent argument of knowledge.* 
 
 STARKs are a highly technical process - an innovation in the world of zero-knowledge cryptography introduced by Eli Ben-Sasson et. al in 2018. In order to prove the integrity of a computation with a STARK, the prover arithmetizes the entire question. By encoding the [execution trace](../explainers/proof-system/what_is_a_trace.md) into [polynomials](about-finite-fields.md), the statement of computational integrity is reduced to a statement about polynomial division. 
 
 ## Documentation
 
 In the context of the RISC Zero zkVM, the term **seal** refers to the zk-STARK that attests to the integrity of the trace. The following documentation describes the RISC Zero zk-STARK in more detail: 
-- [Proof system sequence diagram](proof-system-sequence-diagram.md) <br/> This document includes a sequence diagram and step-by-step specification of the RISC Zero zk-STARK.
+- [Proof system sequence diagram](../explainers/proof-system/proof-system-sequence-diagram.md) <br/> This document includes a sequence diagram and step-by-step specification of the RISC Zero zk-STARK.
   
-- [Constructing a seal](constructing-a-seal.md) <br/> This document shows a simplified, concrete example of the construction of a RISC Zero seal. 
+- [Constructing a seal](../explainers/proof-system/constructing-a-seal.md) <br/> This document shows a simplified, concrete example of the construction of a RISC Zero seal. 
 
 ## References
 We recommend the following external references on STARKs:

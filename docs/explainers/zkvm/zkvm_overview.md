@@ -20,29 +20,28 @@ Anyone with a copy of the receipt can verify the program's execution and read it
 
 ```mermaid
 flowchart LR
-A(Source code)-->|compiles to an|B(ELF binary)
-B-->|Whose execution produces a| C(Trace)
+A(multiply.rs)-->|compiles to an|B(ELF binary)
+B-->|Whose execution produces an| C(Execution trace)
 B-->|Whose hash forms a unique| D(Method ID)
+D-->|That can be compared to the|E(Cryptographic seal)
 C-->|That, if valid,<br>generates a|E(Cryptographic seal)
 B-->|Whose operations can include<br>committing values to a|F(Journal)
 subgraph Together, these form a receipt.
-D
 E
 F
 end
 subgraph x[The receipt tells us:]
-D---G(What binary executed in the zkVM)
-E---H(Whether the execution<br>followed expected behavior<br><br>Whether the journal or method ID<br>have changed)
+E---H(What binary executed in the ZKVM<br>Whether the execution<br>followed expected behavior<br/><br/>Whether the journal or method ID<br/>have changed)
 F---I(The values of all contents<br>written to the public journal)
 end
+style B fill:#3c6464
 style x fill:none, stroke:none
-style G fill:none,stroke:none
 style H fill:none,stroke:none
 style I fill:none,stroke:none
 ```
 
-Before being executed on the zkVM, guest source code is converted into a RISC-V ELF binary. A hash of the binary file is used to create a `method ID` that uniquely identifies the binary being executed. The method ID is added to the `computational receipt`. The binary may include code instructions to publicly commit a value to the `journal`. Later, the journal contents can be read by anyone with the receipt.
+Before being executed on the zkVM, guest source code is converted into a RISC-V ELF binary. The binary file is hashed to create a `method ID` that uniquely identifies the binary being executed. The binary may include code instructions to publicly commit a value to the `journal`. Later, the journal contents can be read by anyone with the receipt.
 
 After the binary is executed, an [execution trace](../proof-system/what_is_a_trace.md) contains a complete record of zkVM operation. The trace is inspected and the ELF file's instructions are compared to the operations that were actually performed. A valid trace means that the ELF file was faithfully executed according to the rules of the RISC-V instruction set architecture.
 
-The trace, the journal, and the method ID are then used to generate a seal, a blob of cryptographic data that shows the receipt is valid. The seal has properties that reveal whether itself, the method ID, or the journal have been altered. When the receipt is verified, the seal will be checked to confirm the validity of the receipt.
+The execution trace and the journal then used to generate a seal, a blob of cryptographic data that shows the receipt is valid. The seal has properties that reveal whether itself or the journal have been altered. When the receipt is verified, the seal will be checked to confirm the validity of the receipt. To check whether the correct binary was executed, the seal can be compared to the method ID of the expected ELF file.

@@ -129,7 +129,8 @@ The Prover evaluates V(x) over the $5, 5^4, \ldots, 5^{93}$, commits the values 
 
 >The FRI protocol is the technique we use for proving (ii). Those details are omitted from this simplified example. 								
 
->In the original STARK protocol, the Verifier tests (i) at a number of test points; the soundness of the protocol depends on the number of tests. The DEEP-ALI technique allows us to achieve a high degree of soundness with a single test. The details of DEEP are described in the following lesson.											
+>In the original STARK protocol, the Verifier tests (i) at a number of test points; the soundness of the protocol depends on the number of tests. The DEEP-ALI technique allows us to achieve a high degree of soundness with a single test. The details of DEEP are described in the following lesson.	
+										
 ## Lesson 9: The DEEP Technique
 
 Here, we use the `trace polynomials` and the `validity polynomial`(s) to construct the `DEEP polynomials`. 

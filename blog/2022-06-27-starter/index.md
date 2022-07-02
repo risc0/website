@@ -19,9 +19,15 @@ In the Rust starter program, we demonstrate how to multiply two numbers and shar
 
 # Differentiating host and guest code
 
-The zkVM runs as a guest on our host system and is interacted with through code that runs on the host. Most code written for the guest zkVM lives in [`methods/guest/src/bin/multiply.rs`](https://github.com/risc0/risc0-rust-starter/blob/main/methods/guest/src/bin/multiply.rs). The main function for our host program code  lives in [`starter/src/main.rs`](https://github.com/risc0/risc0-rust-starter/blob/main/starter/src/main.rs).
+The host driver program runs the guest zkVM. Most code written for the guest zkVM lives in [`methods/guest/src/bin/multiply.rs`](https://github.com/risc0/risc0-rust-starter/blob/main/methods/guest/src/bin/multiply.rs). The main function for our host program code  lives in [`starter/src/main.rs`](https://github.com/risc0/risc0-rust-starter/blob/main/starter/src/main.rs).
 
-When the host code executes, it creates and runs a prover that is responsible for all guest zkVM interactions. The prover runs an ELF binary of the zkVM guest code. After the guest code has executed, the prover returns a [computational receipt](https://www.risczero.com/docs/explainers/proof-system/what_is_a_receipt). In our example, these are accomplished with the following line in the `starter/src/main.rs` host source code:
+When the host code executes, it creates a prover instance that is responsible for all guest zkVM interactions:
+
+```
+    let mut prover = Prover::new(&std::fs::read(MULTIPLY_PATH).unwrap(), MULTIPLY_ID).unwrap();
+```
+
+ The prover runs an ELF binary of the zkVM guest code. After the guest code has executed, the prover returns a [receipt](https://www.risczero.com/docs/explainers/proof-system/what_is_a_receipt). In our example, these are accomplished with the following line in the `starter/src/main.rs` host source code:
 
 ```
 let receipt = prover.run().unwrap();
@@ -29,12 +35,11 @@ let receipt = prover.run().unwrap();
 
 # Understanding the prover
 
-When a prover runs code on the zkVM, three important things happen:
+When a prover runs code on the zkVM, two important things happen:
 1. The ELF binary execution produces an [execution trace](https://www.risczero.com/docs/explainers/proof-system/what_is_a_trace). If valid, the trace generates a `cryptographic seal` that shows the execution followed RISC-V rules.
-2. A hash of the binary called the `method ID` is appended to the receipt. Later, the recipient can check this value and know which binary was executed.
-3. Any values the guest shares are written to the `journal`.
+2. Any values the guest shares are written to the `journal`.
 
-The method ID and a hash of the journal are included in the cryptographic seal so that the recipient will know if they have been altered.
+A hash of the journal is included in the cryptographic seal so that the recipient will know if it has been altered.
 
 The diagram below shows these components in action:
 

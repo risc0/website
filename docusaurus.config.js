@@ -76,23 +76,9 @@ const config = {
             ]
           },
           {
-            type: 'dropdown',
             position: 'left',
-            label: 'Get Started',
-            items: [
-              {label: 'Hello World on Rust',
-              to: 'https://github.com/risc0/risc0-rust-starter'
-              },
-              {label: 'RISC Zero Battleship',
-              to: 'https://github.com/risc0/battleship-example'
-              },
-              {label: 'Rust Crates', 
-              to: 'https://github.com/risc0/risc0#rust-crates'
-              },
-              {label: 'Contribute to RISC Zero',
-              to: 'http://www.github.com/risc0/risc0'
-              }
-            ]
+            label: 'Getting Started',
+            to: 'docs/technology',
           },
           {
             position: 'left',
@@ -106,14 +92,20 @@ const config = {
             label: 'Terminology',
           },
           {
+            type: 'doc',
+            docId: 'faq',
+            position: 'left',
+            label: 'FAQ',
+          },
+          {
             href: 'https://boards.greenhouse.io/risczero',
             position: 'left',
             label: 'Careers',
           },
           {
             href: 'https://github.com/Risc0',
-            label: 'GitHub',
             position: 'right',
+            label: 'GitHub',
           },
         ],
       },

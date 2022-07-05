@@ -78,7 +78,7 @@ const config = {
           {
             position: 'left',
             label: 'Getting Started',
-            to: 'docs/technology',
+            to: 'docs/getting-started',
           },
           {
             position: 'left',

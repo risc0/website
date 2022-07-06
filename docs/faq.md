@@ -81,7 +81,7 @@ Q: If the guest zkVM lives on the host machine, can’t the host still tamper wi
 </summary>
 <br/>
 A: Like other zk-STARKs, RISC Zero’s implementation makes it cryptographically infeasable to generate an invalid receipt:
-* If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
+    * If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
 * If the execution is modified, then the execution trace will be invalid.
 * If the output is modified, then the journal’s hash will not match the hash recorded in the receipt.
 </details>
@@ -98,11 +98,10 @@ Data is sent from the host to the guest via a memory map, but data shared this w
 <details closed>
 <summary>
 Q:
-How do I know which computations can be offloaded to the host?
+How do I know which computations should be performed in the guest zkVM, and which can be offloaded to the host?
 </summary>
 <br/> 
-A:
-Because RISC Zero’s zkVM guarantees that all code run in the VM can be trusted to behave as expected,  its value depends on the host being treated as potentially fully malicious. This means that any operations outsourced to the host should be verified in the zkVM.
+A: If you don't need to perform a computation securely, if others don't rely on it, and if it doesn't produce outputs that others rely on, it can probably be performed outside of the zkVM. However, consider that code run in the RISC Zero zkVM can be shown to behave as expected even on a host that's entirely untrusted. To get the most value out of this guarantee, we recommend dividing the computational labor such that guest computations are still useful when the host is fully malicious. That is, others should not need to trust the host's output or operations in order to benefit from the work done in the zkVM.
 </details>
 <br/>
 -------------------------------

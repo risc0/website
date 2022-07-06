@@ -72,7 +72,7 @@ The next step is for the Prover to commit the `trace polynomials` into a Merkle 
 
 >In order to maintain a Zero-Knowledge protocol, the Prover evaluates each `trace polynomial` over a `shift` of $\mathcal{D}(5^3)$. 
 
-Specifically, we evaluate each `trace polynomial` over $x=5, 5^4, 5^7, ..., 5^{93}.$ 		
+Specifically, we evaluate each `trace polynomial` over $x=5, 5^4, 5^7, ..., 5^{94}.$ 		
 
 ![Lesson 5: ZK Commitments](assets/fibonacci-05.png)									
 Note that because of the `shift`, the yellow and blue cells in `Data Columns 1, 2, and 3` no longer match the `Inputs` and `Asserted Outputs`. In fact, this shift in the evaluation domain `disguises` all the `Trace Data`. 
@@ -119,7 +119,7 @@ $Z(x) = (x-1)(x-47)(x-75)(x-33)(x-96)(x-50)(x-22)(x-64)$, where the 8 terms are 
 
 >Normally, when we divide two low degree polynomials, we don't expect to get another low degree polynomial. But for an honest prover, it's not hard to see that V(x) will be lower degree than C(x), since the roots of Z(x) line up perfectly with roots of C(x).				
 
-The Prover evaluates V(x) over the $5, 5^4, \ldots, 5^{93}$, commits the values to a `validity Merkle tree`, and appends the root to the seal. 			
+The Prover evaluates V(x) over the $5, 5^4, \ldots, 5^{94}$, commits the values to a `validity Merkle tree`, and appends the root to the seal. 			
 
 >The construction of these polynomials is the core conceptual thrust of RISC Zero's proof of trace validity. All of the information necessary to confirm the validity of the original Execution trace can be described in the following assertions about these polynomials: 											
 

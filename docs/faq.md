@@ -3,7 +3,6 @@
 -------------------------------
 ## Contents
 * [ZKP System](#zkp-system)
-* [Cryptography](#cryptography)
 * [Code Project Help](#code-project-help)
 * [Guest/Host Interactions](#guest--host-interactions)
 * [Data Processing & Performance](#data-processing--performance)
@@ -48,10 +47,6 @@ The method ID is the Merkle root for the ‘code’ columns of the proof system.
 <br/>
 -------------------------------
 
-## Cryptography
-
--------------------------------
-
 ## Code Project Help
 
 
@@ -74,7 +69,7 @@ The receipt can be serialized and sent over the network to the verifier. The ver
 Q: What types of operations does the zkVM support in Rust?
 </summary>
 <br/>
-A: Currently the zkVM does not support std, but any crates that work with no_std should be fine. There are sometimes multiple versions of crates and it is necessary to disable certain features. For more information, see this guide.
+A: The zkVM has begun to support std, but if you run into issues, we recommend using any crates that work with no_std.
 </details>
 <br/>
 -------------------------------
@@ -86,7 +81,7 @@ Q: If the guest zkVM lives on the host machine, can’t the host still tamper wi
 </summary>
 <br/>
 A: Like other zk-STARKs, RISC Zero’s implementation makes it cryptographically infeasable to generate an invalid receipt:
-* If the binary is modified, then the receipt’s method ID will not match the method ID expected.
+* If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
 * If the execution is modified, then the execution trace will be invalid.
 * If the output is modified, then the journal’s hash will not match the hash recorded in the receipt.
 </details>

@@ -8,7 +8,7 @@ sidebar_position: 3
 
 The construction of a seal is highly technical, relying on several recent advances in the world of zero-knowledge cryptography. In this series of 10 brief lessons, we walk through the construction of a RISC Zero seal with as little technical jargon as possible. 
 
-You can peek behind the formulas on the [Google Sheet version](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) or [download a PDF](assets/fibonacci-stark.pdf). If you make sense of these 10 lessons, you'll have a solid handle on the mechanics of a zk-STARK (and we'd likely love to [hire you](../src/pages/careers.md)). 
+You can peek behind the formulas on the [Google Sheet version](https://docs.google.com/spreadsheets/d/1Onr41OozD62y-B0jIL7bHAH5kf771-o4xvmnHUFpOyo/edit?usp=sharing) or [download a PDF](assets/fibonacci-stark.pdf). If you make sense of these 10 lessons, you'll have a solid handle on the mechanics of a zk-STARK (and we'd likely love to [hire you](../../../careers)).
 
 The [proof system sequence diagram](proof-system-sequence-diagram.md) describes this process in more generality; we suggest going back and forth between this document and the sequence diagram. 
 
@@ -72,7 +72,7 @@ The next step is for the Prover to commit the `trace polynomials` into a Merkle 
 
 >In order to maintain a Zero-Knowledge protocol, the Prover evaluates each `trace polynomial` over a `shift` of $\mathcal{D}(5^3)$. 
 
-Specifically, we evaluate each `trace polynomial` over $x=5, 5^4, 5^7, ..., 5^{93}.$ 		
+Specifically, we evaluate each `trace polynomial` over $x=5, 5^4, 5^7, ..., 5^{94}.$ 		
 
 ![Lesson 5: ZK Commitments](assets/fibonacci-05.png)									
 Note that because of the `shift`, the yellow and blue cells in `Data Columns 1, 2, and 3` no longer match the `Inputs` and `Asserted Outputs`. In fact, this shift in the evaluation domain `disguises` all the `Trace Data`. 
@@ -119,7 +119,7 @@ $Z(x) = (x-1)(x-47)(x-75)(x-33)(x-96)(x-50)(x-22)(x-64)$, where the 8 terms are 
 
 >Normally, when we divide two low degree polynomials, we don't expect to get another low degree polynomial. But for an honest prover, it's not hard to see that V(x) will be lower degree than C(x), since the roots of Z(x) line up perfectly with roots of C(x).				
 
-The Prover evaluates V(x) over the $5, 5^4, \ldots, 5^{93}$, commits the values to a `validity Merkle tree`, and appends the root to the seal. 			
+The Prover evaluates V(x) over the $5, 5^4, \ldots, 5^{94}$, commits the values to a `validity Merkle tree`, and appends the root to the seal. 			
 
 >The construction of these polynomials is the core conceptual thrust of RISC Zero's proof of trace validity. All of the information necessary to confirm the validity of the original Execution trace can be described in the following assertions about these polynomials: 											
 
@@ -129,7 +129,8 @@ The Prover evaluates V(x) over the $5, 5^4, \ldots, 5^{93}$, commits the values 
 
 >The FRI protocol is the technique we use for proving (ii). Those details are omitted from this simplified example. 								
 
->In the original STARK protocol, the Verifier tests (i) at a number of test points; the soundness of the protocol depends on the number of tests. The DEEP-ALI technique allows us to achieve a high degree of soundness with a single test. The details of DEEP are described in the following lesson.											
+>In the original STARK protocol, the Verifier tests (i) at a number of test points; the soundness of the protocol depends on the number of tests. The DEEP-ALI technique allows us to achieve a high degree of soundness with a single test. The details of DEEP are described in the following lesson.	
+										
 ## Lesson 9: The DEEP Technique
 
 Here, we use the `trace polynomials` and the `validity polynomial`(s) to construct the `DEEP polynomials`. 
@@ -166,11 +167,6 @@ $c'_3(x) = \frac{c_3(x) - c_3(93)}{x - 93}$
 
 $V'(x)  = \frac{V(x) - V(93)}{x - 93}$ where the Prover computes V(93) by running `iNTT(ValidityColumn)` and then evaluating the resulting `validity polynomial` at $z=93$.
 
-
-![Lesson 10: The DEEP Technique](assets/fibonacci-09b.png)
-	
-Note that the output of the iNTT contains only $8$ non-zero entries.
-
 ## Lesson 10: Mixing for FRI
 
 After using the `DEEP polynomials` to check the relation between the Trace Polynomial, the `validity polynomial`, and the `zeros polynomial` at $z=93$, the only thing left for the Prover to do is to show that the `DEEP polynomials` are low-degree. 	
@@ -182,8 +178,17 @@ Letting $c'_1, c'_2, c'_3, d'_1, d'_2, d'_3$, and $V'$ denote the `DEEP polynomi
 				
 ![Lesson 11: Mixing for FRI](assets/fibonacci-10.png)
 
-To complete the argument, the Prover constructs a FRI proof that $f_0(x)$ is a low degree polynomial.													
-With this process, the Prover has constructed a zero-knowledge argument of computational integrity that can be verified incredibly quickly. 
+To complete the argument, the Prover constructs a FRI proof that $f_0(x)$ is a low degree polynomial. With this process, the Prover has constructed a zero-knowledge argument of computational integrity. We omit the details of FRI for brevity, but we can check our work by running an iNTT on the evaluations of $f_0$: 
+
+>`iNTT([53,69,63,30,46,13,60,50,38,3,95,23,75,39,62,19,62,58,41,67,89,41,50,24,95,90,72,20,82,33,0,16],prime=97)`
+
+returns
+
+>`[19, 56, 34, 48, 43, 37, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`
+
+Writing this array as the coefficients of a polynomial, we see that the values in the FRI polynomial column *do*, in fact, correspond to the following low-degree polynomial: 
+
+$f_0(x)=19+56x+34x^2+48x^3+43x^4+37x^5+10x^6$.
 
 Whew! Congratulations and thank you for making it this far!
 

@@ -1,5 +1,5 @@
 # About Finite Fields 
-*RISC Zero's [computational receipts](../explainers/proof-system/what_is_a_receipt.md) are built by converting an assertion of computational integrity into an assertion about polynomials over finite fields. This document serves as a minimal introduction to finite fields, targeted at folks who have some exposure to modular arithmetic and who are curious to learn more about the [math and cryptography behind RISC Zero](https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ1J5PcS2op_vrGtbK5Mif0gAN6wbAaTSWTHy2vuFtfbtqbI_dRqpalNamNjjUcyqD7hDPJRgI2cG-/pubhtml#).*  
+*RISC Zero's [computational receipts](../explainers/proof-system/what_is_a_receipt.md) are built by converting an assertion of computational integrity into an assertion about polynomials over finite fields. This document serves as a minimal introduction to finite fields, targeted at folks who have some exposure to modular arithmetic and who are curious to learn more about the [math and cryptography behind RISC Zero](../explainers/proof-system/constructing-a-seal.md).*  
 
 ## Finite Fields 101: Reciprocals, Exponents, and Generators
 Loosely speaking, a **field** is a set of elements for which addition, subtraction, multiplication, and division work cleanly.  

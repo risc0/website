@@ -10,5 +10,5 @@ The receipt serves as a cryptographic authentication that the given method was e
 
 By linking the MethodID to the asserted output of the computation, computational receipts offer a powerful new model for trust in software. The option to check a computational receipt opens the doors to the `era of verifiable computing`, where we use mathematics and science to bring trustable software into trustless environments. 
 
-*For more information about RISC Zero's receipts, see the [Proof System Sequence Diagram](proof-system-sequence-diagram.md), the [Fibonacci Trace Validation Example](https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ1J5PcS2op_vrGtbK5Mif0gAN6wbAaTSWTHy2vuFtfbtqbI_dRqpalNamNjjUcyqD7hDPJRgI2cG-/pubhtml#) and the [STARKs reference page](../../reference-docs/about-starks.md).* 
+*For a more technical description of RISC Zero's receipts, see the [Proof System Sequence Diagram](proof-system-sequence-diagram.md), the [Seal Construction Explainer](constructing-a-seal.md) and the [STARKs reference page](../../reference-docs/about-starks.md).* 
 

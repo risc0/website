@@ -10,4 +10,4 @@ It's typical to write an execution trace as a rectangular array, where each row 
 
 `RISC Zero's computational receipts use cutting-edge technology to audit an execution trace while preserving computational privacy.`
 
-*For more information about the process of turning an execution trace into a computational receipt, see the [Proof System Sequence Diagram](proof-system-sequence-diagram.md), the [Fibonacci Trace Validation Example](https://docs.google.com/spreadsheets/d/e/2PACX-1vSJ1J5PcS2op_vrGtbK5Mif0gAN6wbAaTSWTHy2vuFtfbtqbI_dRqpalNamNjjUcyqD7hDPJRgI2cG-/pubhtml#) and the [STARKs reference page](../../reference-docs/about-starks.md).* 
+*For more technical description of the process of creating a computational receipt, see the [proof system sequence diagram](proof-system-sequence-diagram.md), the [seal construction explainer](constructing-a-seal.md) and the [STARKs reference page](../../reference-docs/about-starks.md).* 

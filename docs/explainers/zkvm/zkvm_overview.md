@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Overview of the zkVM
 
-*To invite collaboration and open source development, this is an early-release of documentation-in-progress. If you have questions/feedback or if you find errors, please let us know on Twitter or Discord.*
+*To invite collaboration and open source development, this is an early-release of documentation-in-progress. If you have questions/feedback or if you find errors, please let us know on [Twitter](https://twitter.com/risczero) or [Discord](https://discord.gg/risczero).*
 
 A zero-knowledge virtual machine (zkVM) is a virtual machine that runs trusted code and generates proofs that authenticate the zkVM output.  RISC Zero's [zkVM](what_is_risc_zero.md) implementation, based on the RISC-V architecture, executes code and produces a [computational receipt](../proof-system/what_is_a_receipt.md).
 

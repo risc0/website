@@ -13,11 +13,11 @@
 ## ZKP System
 <details closed>
 <summary>Q:
-What is a zero-knowledge proof?
+What is an argument of correct execution?
 </summary>
 <br/>
 A:
-To simplify slightly, zero-knowledge proofs are a protocol between a 'prover' and a 'verifier'.  With this protocol, the prover can run an agreed-upon function F, passing it secret input and generating both a public output and a 'receipt' of F’s correct execution.  The prover can send this receipt to the verifier, who can then check it, and presuming it checks correctly, the verifier can be very sure that prover ran the function correctly and that it produced a specific output.
+Zero-knowledge proofs are a protocol between a 'prover' and a 'verifier'.  With this protocol, the prover can run an agreed-upon function F, passing it secret input and generating both a public output and a 'receipt' of F’s correct execution.  The prover can send this receipt to the verifier, who can then check it, and presuming it checks correctly, the verifier can be very sure that prover ran the function correctly and that it produced a specific output.
 </details>
  <br/>
 
@@ -38,7 +38,7 @@ Because the data structures supporting all three of these need to match very car
 <details closed>
 <summary>
 Q:
-What exactly is the method ID and how do I know it will change if the program ASM is altered?
+What exactly is the method ID and how do I know it will change if the program code is altered?
 </summary>
  <br/>
  A:
@@ -69,7 +69,7 @@ The receipt can be serialized and sent over the network to the verifier. The ver
 Q: What types of operations does the zkVM support in Rust?
 </summary>
 <br/>
-A: The zkVM has begun to support std, but if you run into issues, we recommend using any crates that work with no_std.
+A: The zkVM currently supports the Rust standard library, but if you run into issues, we recommend using any crates that work with no_std.
 </details>
 <br/>
 -------------------------------
@@ -81,7 +81,7 @@ Q: If the guest zkVM lives on the host machine, can’t the host still tamper wi
 </summary>
 <br/>
 A: Like other zk-STARKs, RISC Zero’s implementation makes it cryptographically infeasable to generate an invalid receipt:
-    * If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
+* If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
 * If the execution is modified, then the execution trace will be invalid.
 * If the output is modified, then the journal’s hash will not match the hash recorded in the receipt.
 </details>
@@ -101,7 +101,7 @@ Q:
 How do I know which computations should be performed in the guest zkVM, and which can be offloaded to the host?
 </summary>
 <br/> 
-A: If you don't need to perform a computation securely, if others don't rely on it, and if it doesn't produce outputs that others rely on, it can probably be performed outside of the zkVM. However, consider that code run in the RISC Zero zkVM can be shown to behave as expected even on a host that's entirely untrusted. To get the most value out of this guarantee, we recommend dividing the computational labor such that guest computations are still useful when the host is fully malicious. That is, others should not need to trust the host's output or operations in order to benefit from the work done in the zkVM.
+A: If you don't need to perform a computation securely, if others don't rely on it, and if it doesn't produce outputs that others rely on, it can probably be performed outside of the zkVM. However, consider that code run in the RISC Zero zkVM can be shown to behave as expected even on a host that is entirely untrusted. To get the most value out of this guarantee, we recommend dividing the computational labor with an untrusted host in mind. That is, other parties should not need to trust the host's output or operations in order to benefit from the work done in the zkVM.
 </details>
 <br/>
 -------------------------------

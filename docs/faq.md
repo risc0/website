@@ -13,11 +13,11 @@
 ## ZKP System
 <details closed>
 <summary>Q:
-What is an argument of correct execution?
+What is a zero-knowledge proof?
 </summary>
 <br/>
 A:
-A zero-knowledge proof (or ZKP) is a protocol allowing ["one party (the prover) [to] prove to another party (the verifier) that a given statement is true [without] conveying any additional information"](https://en.wikipedia.org/wiki/Zero-knowledge_proof). In the specific case of the RISC Zero ZKP system, the prover can run an agreed-upon function F, passing it secret input and generating both a public output and a 'receipt' of F’s correct execution.  The prover can send this receipt to the verifier, who can then check it, and presuming it checks correctly, the verifier can be very sure that prover ran the function correctly and that it produced a specific output. See [our explainer on the RISC Zero ZKP system](explainers/proof-system/proof-system-sequence-diagram.md) for more details.
+To simplify slightly, zero-knowledge proofs are a protocol between a 'prover' and a 'verifier'.  With this protocol, the prover can run an agreed-upon function F, passing it secret input and generating both a public output and a 'receipt' of F’s correct execution.  The prover can send this receipt to the verifier, who can then check it, and presuming it checks correctly, the verifier can be very sure that prover ran the function correctly and that it produced a specific output.
 </details>
  <br/>
 
@@ -69,7 +69,7 @@ The receipt can be serialized and sent over the network to the verifier. The ver
 Q: What types of operations does the zkVM support in Rust?
 </summary>
 <br/>
-A: The zkVM currently supports the Rust standard library, but if you run into issues, we recommend using any crates that work with no_std.
+A: The zkVM experimentally supports the Rust standard library. If you run into issues, we recommend using crates with no_std options.
 </details>
 <br/>
 -------------------------------
@@ -81,7 +81,7 @@ Q: If the guest zkVM lives on the host machine, can’t the host still tamper wi
 </summary>
 <br/>
 A: Like other zk-STARKs, RISC Zero’s implementation makes it cryptographically infeasable to generate an invalid receipt:
-* If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
+    * If the binary is modified, then the receipt’s seal will not match the method ID of the expected binary.
 * If the execution is modified, then the execution trace will be invalid.
 * If the output is modified, then the journal’s hash will not match the hash recorded in the receipt.
 </details>

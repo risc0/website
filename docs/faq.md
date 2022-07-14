@@ -17,7 +17,7 @@ What is an argument of correct execution?
 </summary>
 <br/>
 A:
-Zero-knowledge proofs are a protocol between a 'prover' and a 'verifier'.  With this protocol, the prover can run an agreed-upon function F, passing it secret input and generating both a public output and a 'receipt' of F’s correct execution.  The prover can send this receipt to the verifier, who can then check it, and presuming it checks correctly, the verifier can be very sure that prover ran the function correctly and that it produced a specific output.
+A zero-knowledge proof (or ZKP) is a protocol allowing ["one party (the prover) [to] prove to another party (the verifier) that a given statement is true [without] conveying any additional information"](https://en.wikipedia.org/wiki/Zero-knowledge_proof). In the specific case of the RISC Zero ZKP system, the prover can run an agreed-upon function F, passing it secret input and generating both a public output and a 'receipt' of F’s correct execution.  The prover can send this receipt to the verifier, who can then check it, and presuming it checks correctly, the verifier can be very sure that prover ran the function correctly and that it produced a specific output. See [our explainer on the RISC Zero ZKP system](explainers/proof-system/proof-system-sequence-diagram.md) for more details.
 </details>
  <br/>
 
